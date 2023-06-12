@@ -1,0 +1,24 @@
+{
+  "name": "inventory_system",
+  "version": "1.0.0",
+  "description": "This is a system which can assist IT administrators and IT managers to manage IT corporate equipments",
+  "main": "app.js",
+  "scripts": {
+    "start": "app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Jean Pierre Ndagijimana",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-layouts": "^1.0.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
