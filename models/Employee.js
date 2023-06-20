@@ -10,7 +10,7 @@ const Employee = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    department_id: {
+    department_name: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {

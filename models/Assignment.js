@@ -9,7 +9,7 @@ const Assignment = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    employee_id: {
+    employee_email: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
@@ -17,15 +17,7 @@ const Assignment = db.define(
         key: "employee_id",
       },
     },
-    role_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: "roles",
-        key: "role_id",
-      },
-    },
-    device_id: {
+    device_name: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {

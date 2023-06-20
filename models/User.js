@@ -11,7 +11,7 @@ const User = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    role_id: {
+    role_name: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {

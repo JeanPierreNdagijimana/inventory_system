@@ -9,7 +9,7 @@ const Device = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    device_type_id: {
+    device_type_name: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
