@@ -36,4 +36,4 @@ const Role = db.define(
   await db.sync();
 })();
 
-export { Role };
+export default Role;

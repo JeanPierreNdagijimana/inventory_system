@@ -8,13 +8,13 @@ import passportStrategy from "../config/passport.js";
 passportStrategy(passport);
 import { Sequelize } from "sequelize";
 import { db } from "../config/db.js";
-import { Assignment } from "../models/Assignment.js";
-import { Device } from "../models/Device.js";
-import { Device_type } from "../models/Device_type.js";
-import { Employee } from "../models/Employee.js";
-import { Role } from "../models/Role.js";
-import { User } from "../models/User.js";
-import { Department } from "../models/Department.js";
+import Assignment from "../models/Assignment.js";
+import Device from "../models/Device.js";
+import Device_type from "../models/Device_type.js";
+import Employee from "../models/Employee.js";
+import Department from "../models/Department.js";
+import Role from "../models/Role.js";
+import User from "../models/User.js";
 
 const UserRouter = express.Router();
 
@@ -128,7 +128,7 @@ UserRouter.post("/login", (req, res, next) => {
 });
 
 //Logout handle
-userRouter.get("/logout", (req, res) => {
+UserRouter.get("/logout", (req, res) => {
   req.logout({}, (err) => {
     if (err) {
       console.log(err);

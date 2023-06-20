@@ -3,16 +3,18 @@ import session from "express-session";
 import passport from "passport";
 import { Sequelize } from "sequelize";
 import { db } from "../config/db.js";
-import { Assignment } from "../models/Assignment.js";
-import { Device } from "../models/Device.js";
-import { Device_type } from "../models/Device_type.js";
-import { Employee } from "../models/Employee.js";
-import { Department } from "../models/Department.js";
+import Assignment from "../models/Assignment.js";
+import Device from "../models/Device.js";
+import Device_type from "../models/Device_type.js";
+import Employee from "../models/Employee.js";
+import Department from "../models/Department.js";
+import Role from "../models/Role.js";
+import User from "../models/User.js";
 
 const DeviceTypeRouter = express.Router();
 
 //add device type
-DeviceTypeRouter.post("/add", (req, res) => {
+DeviceTypeRouter.post("/addDeviceType", (req, res) => {
   const { device_type_name, devive_type_prefix } = req.body;
   let errors = [];
 
@@ -40,3 +42,5 @@ DeviceTypeRouter.post("/add", (req, res) => {
       .catch((err) => console.log(err));
   }
 });
+
+export default DeviceTypeRouter;

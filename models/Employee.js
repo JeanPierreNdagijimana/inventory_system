@@ -56,4 +56,4 @@ const Employee = db.define(
   await db.sync();
 })();
 
-export { Employee };
+export default Employee;

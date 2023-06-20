@@ -50,4 +50,4 @@ const Assignment = db.define(
   await db.sync();
 })();
 
-export { Assignment };
+export default Assignment;

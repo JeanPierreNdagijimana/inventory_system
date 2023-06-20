@@ -2,19 +2,18 @@ import express from "express";
 import exphbs from "express-handlebars";
 import bodyParser from "body-parser";
 import path from "path";
-import router from "./routes/index.js";
-import userRouter from "./routes/users.js";
 import session from "express-session";
 import passport from "passport";
 import flash from "connect-flash";
 import { db } from "./config/db.js";
 import EmployeeRouter from "./routes/employees.js";
-import DepartmentRouter from "./routes/departments.js";
 import DeviceRouter from "./routes/devices.js";
-import DeviceTypeRouter from "./routes/device_types.js";
+import DeviceTypeRouter from "./routes/deviceTypes.js";
 import AssignmentRouter from "./routes/assignments.js";
+import router from "./routes/index.js";
+import userRouter from "./routes/users.js";
 import expressLayouts from "express-ejs-layouts";
-import { db } from "./config/db.js";
+
 //passport config
 import "./config/passport.js";
 const __dirname = path.resolve();

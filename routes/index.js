@@ -1,15 +1,17 @@
 import express from "express";
 export const router = express.Router();
-import auth from "../config/auth.js";
-// import { ensureAuthenticated } from "../config/auth.js";
-//welcome page
+import { db } from "../config/db.js";
+import Role from "../models/Role.js";
+import User from "../models/User.js";
+
+//Home page
 router.get("/", (req, res) => res.render("home.ejs"));
 
 //dashboard
-router.get("/dashboard", auth.ensureAuthenticated, (req, res) =>
+router.get("/dashboard", db.ensureAuthenticated, (req, res) =>
   res.render("dashboard.ejs", {
-    name: req.user.name, //req.user is available because of passport)
-    email: req.user.email, //req.user is available because of passport)
+    username: req.user.username, //req.user is available because of passport)
+    user_email: req.user.user_email, //req.user is available because of passport)
   })
 );
 

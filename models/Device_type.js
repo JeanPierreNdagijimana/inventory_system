@@ -39,4 +39,4 @@ const Device_type = db.define(
   await db.sync();
 })();
 
-export { Device_type };
+export default Device_type;

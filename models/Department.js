@@ -35,4 +35,4 @@ const Department = db.define(
   await db.sync();
 })();
 
-export { Department };
+export default Department;

@@ -61,4 +61,4 @@ const User = db.define(
   await db.sync();
 })();
 
-export { User };
+export default User;

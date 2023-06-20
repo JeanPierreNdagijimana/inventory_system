@@ -55,4 +55,4 @@ const Device = db.define(
   await db.sync();
 })();
 
-export { Device };
+export default Device;
