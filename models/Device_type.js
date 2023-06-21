@@ -35,7 +35,7 @@ const Device_type = db.define(
 
 //self-invoking function
 (async () => {
-  //create gigs table if it doesn't exist
+  //create device_type table if it doesn't exist
   await db.sync();
 })();
 

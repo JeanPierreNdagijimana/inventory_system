@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 app.use("/", router);
 app.use("/users", userRouter);
 app.use("/employees", EmployeeRouter);
-app.use("/departments", DepartmentRouter);
+// app.use("/departments", DepartmentRouter);
 app.use("/devices", DeviceRouter);
 app.use("/device_types", DeviceTypeRouter);
 app.use("/assignments", AssignmentRouter);
