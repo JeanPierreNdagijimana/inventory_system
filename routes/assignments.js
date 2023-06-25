@@ -1,45 +1,47 @@
 import express from "express";
-import session from "express-session";
-import passport from "passport";
-import { Sequelize } from "sequelize";
-import { db } from "../config/db.js";
-import Assignment from "../models/Assignment.js";
-import Device from "../models/Device.js";
-import Device_type from "../models/Device_type.js";
-import Employee from "../models/Employee.js";
-import Department from "../models/Department.js";
-import Role from "../models/Role.js";
-import User from "../models/User.js";
+import Assignment from "../models/Assignment";
 
 const AssignmentRouter = express.Router();
 
-//add assignment
-AssignmentRouter.post("/addAssignment", (req, res) => {
-  const { employee_email, device_name, assignment_status } = req.body;
+//get all assignments
+AssignmentRouter.get("/", async (req, res) => {
+  const assignments = await Assignment.findAll();
+
+  res.render("assignments.ejs", { assignments });
+});
+
+//get add assignment page
+AssignmentRouter.get("/new", (req, res) => {
+  res.render("addAssignment.ejs");
+});
+
+//add new assignment
+AssignmentRouter.post("/new", (req, res) => {
+  const { employee_id, device_id, status } = req.body;
   let errors = [];
 
   //check required fields
-  if (!employee_email || !device_name || !assignment_status) {
+  if (!employee_id || !device_id || !status) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("addAssignment.ejs", {
       errors,
-      employee_email,
-      device_name,
-      assignment_status,
+      employee_id,
+      device_id,
+      status,
     });
   } else {
     //validation passed
     Assignment.create({
-      employee_email,
-      device_name,
-      assignment_status,
+      employee_id,
+      device_id,
+      status,
     })
       .then((assignment) => {
         req.flash("success_msg", "Assignment added successfully");
-        res.redirect("/assignment");
+        res.redirect("/assignments");
       })
       .catch((err) => console.log(err));
   }
