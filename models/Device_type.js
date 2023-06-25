@@ -2,18 +2,13 @@ import { Sequelize } from "sequelize";
 import { db } from "../config/db.js";
 
 const Device_type = db.define(
-  "device_type",
+  "device_types",
   {
-    device_type_id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    device_type_name: {
+    name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    devive_type_prefix: {
+    prefix: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -21,22 +16,7 @@ const Device_type = db.define(
   {
     sequelize: db,
     tableName: "device_types",
-    schema: "inventoryDB",
-    timestamps: false,
-    indexes: [
-      {
-        name: "PK__device_t__B3A1D4E5E6F5F8F7",
-        unique: true,
-        fields: [{ name: "device_type_id" }],
-      },
-    ],
   }
 );
-
-//self-invoking function
-(async () => {
-  //create device_type table if it doesn't exist
-  await db.sync();
-})();
 
 export default Device_type;

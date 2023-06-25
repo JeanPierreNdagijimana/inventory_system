@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-export const db = new Sequelize("inventoryDB", "root", "Learning@Time1", {
+export const db = new Sequelize("inventoryDB", "root", "", {
   host: "localhost",
   dialect: "mysql",
 });

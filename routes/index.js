@@ -1,8 +1,5 @@
 import express from "express";
-export const router = express.Router();
-import { db } from "../config/db.js";
-import Role from "../models/Role.js";
-import User from "../models/User.js";
+const router = express.Router();
 import auth from "../config/auth.js";
 
 //Home page

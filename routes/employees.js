@@ -1,13 +1,4 @@
 import express from "express";
-import session from "express-session";
-import passport from "passport";
-import { Sequelize } from "sequelize";
-import { db } from "../config/db.js";
-import Assignment from "../models/Assignment.js";
-import Device from "../models/Device.js";
-import Device_type from "../models/Device_type.js";
-import Employee from "../models/Employee.js";
-import Department from "../models/Department.js";
 
 const EmployeeRouter = express.Router();
 
