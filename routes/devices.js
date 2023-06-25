@@ -3,20 +3,6 @@ import Device from "../models/Device.js";
 import Device_type from "../models/Device_type.js";
 
 const DeviceRouter = express.Router();
-const devices = [
-  {
-    id: 1,
-    name: "Device 1",
-  },
-  {
-    id: 2,
-    name: "Device 2",
-  },
-  {
-    id: 3,
-    name: "Device 3",
-  },
-];
 
 //show all devices
 DeviceRouter.get("/", async (req, res) => {

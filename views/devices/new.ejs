@@ -8,19 +8,11 @@
         <form action="/devices" method="POST">
           <div class="form-group">
             <label for="device_type_name">Device Type name</label>
-            <select name="devices" id="devices">
+            <select class= "form-control" name="devices" id="devices">
               <option value="1">headphones</option>
               <option value="2">laptop</option>
               <option value="3">phone</option>
             </select>
-            <input
-              type="text"
-              id="device_type_name"
-              name="device_type_name"
-              class="form-control"
-              placeholder="Enter device type name"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
-            />
           </div>
           <div class="form-group">
             <label for="device_model">Devide model</label>
@@ -63,7 +55,7 @@
               name="device_status"
               class="form-control"
               placeholder="1 for fuctional, 0 for non-functional, 2 for under maintenance"
-              <!-- value="<%= typeof name != 'undefined' ? name : '' %>" -->
+              value="<%= typeof name != 'undefined' ? name : '' %>"
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">
