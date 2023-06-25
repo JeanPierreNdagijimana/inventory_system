@@ -3,7 +3,7 @@ import express from "express";
 const EmployeeRouter = express.Router();
 
 //add employee
-EmployeeRouter.post("/addEmployee", (req, res) => {
+EmployeeRouter.post("/new", (req, res) => {
   const {
     employee_firstName,
     employee_lastName,

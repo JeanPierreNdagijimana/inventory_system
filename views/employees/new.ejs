@@ -4,8 +4,8 @@
         <h1 class="text-center mb-3">
           <i class="fas fa-user-plus"></i> Add new Employee
         </h1>
-      
-        <form action="/users/addEmployee" method="POST">
+        <%- include ('../partials/messages'); -%>
+        <form action="/employees/new" method="POST">
           <div class="form-group">
             <label for="employee_firstName">First Name</label>
             <input

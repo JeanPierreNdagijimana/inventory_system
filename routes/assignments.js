@@ -1,5 +1,5 @@
 import express from "express";
-import Assignment from "../models/Assignment";
+import Assignment from "../models/Assignment.js";
 
 const AssignmentRouter = express.Router();
 

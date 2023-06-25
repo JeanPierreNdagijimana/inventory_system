@@ -4,10 +4,15 @@
         <h1 class="text-center mb-3">
           <i class="fas fa-user-plus"></i> Add Device
         </h1>
-      
-        <form action="/users/addDevice" method="POST">
+        <%- include ('../partials/messages'); -%>
+        <form action="/devices" method="POST">
           <div class="form-group">
             <label for="device_type_name">Device Type name</label>
+            <select name="devices" id="devices">
+              <option value="1">headphones</option>
+              <option value="2">laptop</option>
+              <option value="3">phone</option>
+            </select>
             <input
               type="text"
               id="device_type_name"
