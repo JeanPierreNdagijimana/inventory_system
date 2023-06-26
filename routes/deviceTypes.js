@@ -1,35 +1,30 @@
 import express from "express";
+import DeviceType from "../models/DeviceType.js";
+import {
+  getDeviceTypes,
+  postDeviceTypes,
+  getAddDeviceType,
+  postAddDeviceType,
+  getEditDeviceType,
+  postEditDeviceType,
+  deleteDeviceType,
+} from "../controllers/device_types.js";
 
 const DeviceTypeRouter = express.Router();
 
-//add device type
-DeviceTypeRouter.post("/addDeviceType", (req, res) => {
-  const { device_type_name, devive_type_prefix } = req.body;
-  let errors = [];
+//show all device types
+DeviceTypeRouter.get("/", getDeviceTypes);
+DeviceTypeRouter.post("/", postDeviceTypes);
 
-  //check required fields
-  if (!device_type_name || !devive_type_prefix) {
-    errors.push({ msg: "Please fill in all fields" });
-  }
-  //check if there are errors
-  if (errors.length > 0) {
-    res.render("addDeviceType.ejs", {
-      errors,
-      device_type_name,
-      devive_type_prefix,
-    });
-  } else {
-    //validation passed
-    Device_type.create({
-      device_type_name,
-      devive_type_prefix,
-    })
-      .then((device_type) => {
-        req.flash("success_msg", "Device type added successfully");
-        res.redirect("/device_type");
-      })
-      .catch((err) => console.log(err));
-  }
-});
+//add device type
+DeviceTypeRouter.get("/new", getAddDeviceType);
+DeviceTypeRouter.post("/new", postAddDeviceType);
+
+//edit device type
+DeviceTypeRouter.get("/edit/:id", getEditDeviceType);
+DeviceTypeRouter.post("/edit/:id", postEditDeviceType);
+
+//delete device type
+DeviceTypeRouter.delete("/:id", deleteDeviceType);
 
 export default DeviceTypeRouter;

@@ -1,0 +1,56 @@
+//ejs to display all assignments in a table
+<table class="table table-striped table-bordered">
+
+    <thead>
+
+        <tr>
+
+            <th>Device Type</th>
+
+            <th>Device Model</th>
+
+            <th>Device Serial Number</th>
+
+            <th>Device Code</th>
+
+            <th>Device Status</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <% for(var i=0; i<assignments.length; i++) {%>
+
+            <tr>
+
+                <td><%= assignments[i].device_type_name %></td>
+
+                <td><%= assignments[i].device_model %></td>
+
+                <td><%= assignments[i].device_serial_number %></td>
+
+                <td><%= assignments[i].device_code %></td>
+
+                <td><%= assignments[i].device_status %></td>
+
+                <td>
+
+                    <a href="/assignments/<%= assignments[i]._id %>" class="btn btn-primary">View</a>
+
+                    <a href="/assignments/<%= assignments[i]._id %>/edit" class="btn btn-warning">Edit</a>
+
+                    <form action="/assignments/<%= assignments[i]._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+
+                        <button class="btn btn-danger">Delete</button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+        <% } %>
+
+    </tbody>

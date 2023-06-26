@@ -1,53 +1,31 @@
 import express from "express";
+import {
+  getEmployee,
+  postEmployee,
+  getEmployeeList,
+  postEmployeeList,
+  getEmployeeEdit,
+  postEmployeeEdit,
+  getEmployeeDelete,
+  postEmployeeDelete,
+} from "../controllers/employees.js";
 
 const EmployeeRouter = express.Router();
 
 //add employee
-EmployeeRouter.post("/new", (req, res) => {
-  const {
-    employee_firstName,
-    employee_lastName,
-    employee_email,
-    employee_phone,
-    department_name,
-  } = req.body;
-  let errors = [];
+EmployeeRouter.get("/new", getEmployee);
+EmployeeRouter.post("/new", postEmployee);
 
-  //check required fields
-  if (
-    !employee_firstName ||
-    !employee_lastName ||
-    !employee_email ||
-    !employee_phone ||
-    !department_name
-  ) {
-    errors.push({ msg: "Please fill in all fields" });
-  }
-  //check if there are errors
-  if (errors.length > 0) {
-    res.render("addEmployee.ejs", {
-      errors,
-      employee_firstName,
-      employee_lastName,
-      employee_email,
-      employee_phone,
-      department_name,
-    });
-  } else {
-    //validation passed
-    Employee.create({
-      employee_firstName,
-      employee_lastName,
-      employee_email,
-      employee_phone,
-      department_name,
-    })
-      .then((employee) => {
-        req.flash("success_msg", "Employee added successfully");
-        res.redirect("/employee");
-      })
-      .catch((err) => console.log(err));
-  }
-});
+//get employee list
+EmployeeRouter.get("/", getEmployeeList);
+EmployeeRouter.post("/", postEmployeeList);
+
+//edit employee
+EmployeeRouter.get("/edit/:id", getEmployeeEdit);
+EmployeeRouter.post("/edit/:id", postEmployeeEdit);
+
+//delete employee
+EmployeeRouter.get("/delete/:id", getEmployeeDelete);
+EmployeeRouter.post("/delete/:id", postEmployeeDelete);
 
 export default EmployeeRouter;

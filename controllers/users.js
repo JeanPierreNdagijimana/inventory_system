@@ -3,8 +3,9 @@ import passportStrategy from "../config/passport.js";
 passportStrategy(passport);
 
 import User from "../models/User.js";
+import e from "connect-flash";
 
-export const getLogin = async (req, res) => res.render("login.ejs");
+export const getLogin = async (req, res) => res.render("/users/login.ejs");
 
 export const postLogin = (req, res, next) => {
   passport.authenticate("local", {
@@ -14,7 +15,8 @@ export const postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-export const getRegister = async (req, res) => res.render("register.ejs");
+export const getRegister = async (req, res) =>
+  res.render("/users/register.ejs");
 
 export const postRegister = async (req, res) => {
   const { first_name, last_name, username, email, role, password, password2 } =
@@ -44,7 +46,7 @@ export const postRegister = async (req, res) => {
   }
   //check if there are errors
   if (errors.length > 0) {
-    res.render("register.ejs", {
+    res.render("/users/register.ejs", {
       errors,
       first_name,
       last_name,
@@ -60,7 +62,7 @@ export const postRegister = async (req, res) => {
       if (user) {
         //user exists
         errors.push({ msg: "Username is already registered" });
-        res.render("register.ejs", {
+        res.render("/users/register.ejs", {
           errors,
           first_name,
           last_name,
@@ -101,6 +103,51 @@ export const postRegister = async (req, res) => {
       }
     });
   }
+};
+
+//show all users
+export const getUsers = async (req, res) => {
+  User.findAll()
+    .then((users) => {
+      res.render("/users/index.ejs", { users: users });
+    })
+    .catch((err) => console.log(err));
+};
+//edit user
+export const getEditUser = async (req, res) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then((user) => {
+      res.render("/users/edit.ejs", { user: user });
+    })
+    .catch((err) => console.log(err));
+};
+export const postEditUser = async (req, res) => {
+  const { first_name, last_name, username, email, role } = req.body;
+  User.update(
+    {
+      first_name: first_name,
+      last_name: last_name,
+      username: username,
+      email: email,
+      role: role,
+    },
+    { where: { id: req.params.id } }
+  )
+    .then((user) => {
+      req.flash("success_msg", "User updated successfully");
+      res.redirect("/users/index.ejs");
+    })
+    .catch((err) => console.log(err));
+};
+
+//delete user
+export const getDeleteUser = async (req, res) => {
+  User.destroy({ where: { id: req.params.id } })
+    .then((user) => {
+      req.flash("success_msg", "User deleted successfully");
+      res.redirect("/users/index.ejs");
+    })
+    .catch((err) => console.log(err));
 };
 
 export const getLogout = (req, res) => {

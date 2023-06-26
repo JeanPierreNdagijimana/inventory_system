@@ -1,0 +1,22 @@
+//ejs code to edit a device type
+<% include ../partials/header %>
+<h1>Edit Device Type</h1>
+<form action="/device_types/<%= device_type._id %>?_method=PUT" method="POST">
+    <div>
+        <label for="device_type[name]">Name:</label>
+        <input type="text" name="device_type[name]" value="<%= device_type.name %>">
+    </div>
+    <div>
+        <label for="device_type[description]">Description:</label>
+        <input type="text" name="device_type[description]" value="<%= device_type.description %>">
+    </div>
+    <div>
+        <label for="device_type[difficulty]">Difficulty:</label>
+        <input type="text" name="device_type[difficulty]" value="<%= device_type.difficulty %>">
+    </div>
+    <div>
+        <label for="device_type[completed]">Completed:</label>
+        <input type="checkbox" name="device_type[completed]" <% if(device_type.completed){ %> checked <% } %>>
+    </div>
+    <input type="submit" value="Update Device Type">
+</form>

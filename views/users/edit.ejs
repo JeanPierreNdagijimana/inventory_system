@@ -1,0 +1,22 @@
+//ejs code to edit user
+<% include ../partials/header %>
+<h1>Edit User</h1>
+<form action="/users/<%= user._id %>?_method=PUT" method="POST">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<%= user.name %>">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" value="<%= user.email %>">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+    </div>
+    <div>
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2">
+    </div>
+    <input type="submit" value="Submit">
+</form>

@@ -1,51 +1,30 @@
 import express from "express";
 import Department from "../models/Department.js";
+import {
+  getDepartments,
+  postDepartments,
+  getNewDepartment,
+  postNewDepartment,
+  getEditDepartment,
+  postEditDepartment,
+  deleteDepartment,
+} from "../controllers/departments.js";
 
 const DepartmentRouter = express.Router();
 
 //show all departments
-DepartmentRouter.get("/", async (req, res) => {
-  try {
-    const departments = await Department.findAll();
-    res.render("departments/index.ejs", {
-      departments,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
+DepartmentRouter.get("/", getDepartments);
+DepartmentRouter.post("/", postDepartments);
 
 //new department page
-DepartmentRouter.get("/new", (req, res) => {
-  res.render("departments/new.ejs");
-});
+DepartmentRouter.get("/new", getNewDepartment);
+DepartmentRouter.post("/new", postNewDepartment);
 
-//add department
-DepartmentRouter.post("/new", (req, res) => {
-  const { department_name } = req.body;
-  let errors = [];
+//edit department page
+DepartmentRouter.get("/edit/:id", getEditDepartment);
+DepartmentRouter.post("/edit/:id", postEditDepartment);
 
-  //check required fields
-  if (!department_name) {
-    errors.push({ msg: "Please fill in all fields" });
-  }
-  //check if there are errors
-  if (errors.length > 0) {
-    res.render("departments/new.ejs", {
-      errors,
-      department_name,
-    });
-  } else {
-    //validation passed
-    Department.create({
-      department_name,
-    })
-      .then((department) => {
-        req.flash("success_msg", "Department added successfully");
-        res.redirect("/department");
-      })
-      .catch((err) => console.log(err));
-  }
-});
+//delete department
+DepartmentRouter.delete("/:id", deleteDepartment);
 
 export default DepartmentRouter;

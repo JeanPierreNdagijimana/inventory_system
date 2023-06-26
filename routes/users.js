@@ -8,6 +8,10 @@ import {
   getRegister,
   postLogin,
   postRegister,
+  getUsers,
+  getEditUser,
+  postEditUser,
+  deleteUser,
 } from "../controllers/users.js";
 
 const UserRouter = express.Router();
@@ -23,6 +27,13 @@ UserRouter.get("/register", getRegister);
 
 //Register handle
 UserRouter.post("/register", postRegister);
+
+//edit user
+UserRouter.get("/edit/:id", getEditUser);
+UserRouter.post("/edit/:id", postEditUser);
+
+//delete user
+UserRouter.delete("/:id", deleteUser);
 
 //Logout handle
 UserRouter.get("/logout", getLogout);
