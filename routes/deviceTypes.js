@@ -1,5 +1,7 @@
 import express from "express";
-import DeviceType from "../models/DeviceType.js";
+// import DeviceType from "../models/Device_type.js";
+import { db } from "../config/db.js";
+import Device_type from "../models/Device_type.js";
 import {
   getDeviceTypes,
   postDeviceTypes,

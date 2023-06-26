@@ -11,7 +11,7 @@ import {
   getUsers,
   getEditUser,
   postEditUser,
-  deleteUser,
+  getDeleteUser,
 } from "../controllers/users.js";
 
 const UserRouter = express.Router();
@@ -33,7 +33,7 @@ UserRouter.get("/edit/:id", getEditUser);
 UserRouter.post("/edit/:id", postEditUser);
 
 //delete user
-UserRouter.delete("/:id", deleteUser);
+UserRouter.delete("/:id", getDeleteUser);
 
 //Logout handle
 UserRouter.get("/logout", getLogout);

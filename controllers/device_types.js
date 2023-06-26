@@ -1,5 +1,5 @@
 import express from "express";
-import DeviceType from "../models/DeviceType.js";
+import DeviceType from "../models/Device_type.js";
 
 //show all device types
 export const getDeviceTypes = async (req, res) => {
