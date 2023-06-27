@@ -5,19 +5,12 @@ import Assignment from "../models/Assignment.js";
 export const getAssignments = async (req, res) => {
   const assignments = await Assignment.findAll();
 
-  res.render("/assignments/index.ejs", { assignments });
-};
-
-//post all assignments
-export const postAssignments = async (req, res) => {
-  const assignments = await Assignment.findAll();
-
-  res.render("/assignments/index.ejs", { assignments });
+  res.render("assignments/index.ejs", { assignments });
 };
 
 //get add assignment page
 export const getNewAssignment = (req, res) => {
-  res.render("/assignments/new.ejs");
+  res.render("assignments/new.ejs");
 };
 
 //post add assignment page
@@ -31,7 +24,7 @@ export const postNewAssignment = (req, res) => {
   }
   //check if there are errors
   if (errors.length > 0) {
-    res.render("/assignments/new.ejs", {
+    res.render("assignments/new.ejs", {
       errors,
       employee_id,
       device_id,
@@ -46,7 +39,7 @@ export const postNewAssignment = (req, res) => {
     })
       .then((assignment) => {
         req.flash("success_msg", "Assignment added successfully");
-        res.redirect("/assignments/index.ejs");
+        res.redirect("/assignments");
       })
       .catch((err) => console.log(err));
   }
@@ -56,7 +49,7 @@ export const postNewAssignment = (req, res) => {
 export const getEditAssignment = async (req, res) => {
   const assignment = await Assignment.findByPk(req.params.id);
 
-  res.render("/assignments/edit.ejs", { assignment });
+  res.render("assignments/edit.ejs", { assignment });
 };
 
 //post edit assignment page
@@ -70,7 +63,7 @@ export const postEditAssignment = async (req, res) => {
   }
   //check if there are errors
   if (errors.length > 0) {
-    res.render("/assignments/edit.ejs", {
+    res.render("assignments/edit.ejs", {
       errors,
       employee_id,
       device_id,
@@ -88,7 +81,7 @@ export const postEditAssignment = async (req, res) => {
     )
       .then((assignment) => {
         req.flash("success_msg", "Assignment updated successfully");
-        res.redirect("/assignments/index.ejs");
+        res.redirect("/assignments");
       })
       .catch((err) => console.log(err));
   }
@@ -100,5 +93,5 @@ export const deleteAssignment = async (req, res) => {
 
   assignment.destroy();
   req.flash("success_msg", "Assignment deleted successfully");
-  res.redirect("/assignments/index.ejs");
+  res.redirect("/assignments");
 };

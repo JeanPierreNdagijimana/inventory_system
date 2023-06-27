@@ -115,6 +115,32 @@ app.use("/departments", DepartmentRouter);
 app.use("/devices", DeviceRouter);
 app.use("/device_types", DeviceTypeRouter);
 app.use("/assignments", AssignmentRouter);
+//loclahost:5000
+//loclahost:5000/dashoard
+//loclahost:5000/users/login
+//loclahost:5000/users/register
+//loclahost:5000/users/logout
+//loclahost:5000/users/edit/:id
+//loclahost:5000/users/delete/:id
+//loclahost:5000/employees/
+//loclahost:5000/employees/new
+//loclahost:5000/employees/edit/:id
+//loclahost:5000/employees/:id
+//loclahost:5000/departments
+//loclahost:5000/departments/new
+//loclahost:5000/departments/edit/:id
+//loclahost:5000/departments/:id
+//loclahost:5000/devices
+//loclahost:5000/devices/new
+//loclahost:5000/devices/edit/:id
+//loclahost:5000/device_types
+//loclahost:5000/device_types/new
+//loclahost:5000/device_types/edit/:id
+//loclahost:5000/device_types/:id
+//loclahost:5000/assignments
+//loclahost:5000/assignments/new
+//loclahost:5000/assignments/edit/:id
+//loclahost:5000/assignments/:id
 
 //set a port
 const PORT = process.env.PORT || 5000;

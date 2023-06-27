@@ -7,11 +7,11 @@
         <%- include ('../partials/messages'); -%>
         <form action="/departments/new" method="POST">
           <div class="form-group">
-            <label for="department_name">Department name</label>
+            <label for="name">Department name</label>
             <input
               type="text"
-              id="department_name"
-              name="department_name"
+              id="name"
+              name="name"
               class="form-control"
               placeholder="Enter department name"
               value="<%= typeof name != 'undefined' ? name : '' %>"

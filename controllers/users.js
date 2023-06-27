@@ -1,26 +1,24 @@
 import passport from "passport";
 import passportStrategy from "../config/passport.js";
 passportStrategy(passport);
-
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import e from "connect-flash";
 
-export const getLogin = async (req, res) =>
-  res.render("/views/users/login.ejs");
+export const getLogin = async (req, res) => res.render("users/login.ejs");
 
 export const postLogin = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/views/dashboard.ejs",
-    failureRedirect: "/views/users/login.ejs",
+    successRedirect: "/dashboard",
+    failureRedirect: "/users/login",
     failureFlash: true,
   })(req, res, next);
 };
 
-export const getRegister = async (req, res) =>
-  res.render("/views/users/register.ejs");
+export const getRegister = async (req, res) => res.render("users/register.ejs");
 
 export const postRegister = async (req, res) => {
-  const { first_name, last_name, username, email, role, password, password2 } =
+  const { first_name, last_name, username, email, password, password2 } =
     req.body;
 
   let errors = [];
@@ -31,7 +29,6 @@ export const postRegister = async (req, res) => {
     !last_name ||
     !username ||
     !email ||
-    !role ||
     !password ||
     !password2
   ) {
@@ -47,13 +44,12 @@ export const postRegister = async (req, res) => {
   }
   //check if there are errors
   if (errors.length > 0) {
-    res.render("/views/users/register.ejs", {
+    res.render("users/register.ejs", {
       errors,
       first_name,
       last_name,
       username,
       email,
-      role,
       password,
       password2,
     });
@@ -63,13 +59,12 @@ export const postRegister = async (req, res) => {
       if (user) {
         //user exists
         errors.push({ msg: "Username is already registered" });
-        res.render("/views/users/register.ejs", {
+        res.render("users/register.ejs", {
           errors,
           first_name,
           last_name,
           username,
           email,
-          role,
           password,
           password2,
         });
@@ -79,7 +74,6 @@ export const postRegister = async (req, res) => {
           last_name,
           username,
           email,
-          role,
           password,
         });
         //Hash password
@@ -96,7 +90,7 @@ export const postRegister = async (req, res) => {
                   "success_msg",
                   "You are now registered and can log in"
                 );
-                res.redirect("/views/users/login");
+                res.redirect("/users/login");
               })
               .catch((err) => console.log(err));
           })
@@ -110,7 +104,7 @@ export const postRegister = async (req, res) => {
 export const getUsers = async (req, res) => {
   User.findAll()
     .then((users) => {
-      res.render("/views/users/index.ejs", { users: users });
+      res.render("users/index.ejs", { users: users });
     })
     .catch((err) => console.log(err));
 };
@@ -118,25 +112,24 @@ export const getUsers = async (req, res) => {
 export const getEditUser = async (req, res) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => {
-      res.render("/views/users/edit.ejs", { user: user });
+      res.render("users/edit.ejs", { user: user });
     })
     .catch((err) => console.log(err));
 };
 export const postEditUser = async (req, res) => {
-  const { first_name, last_name, username, email, role } = req.body;
+  const { first_name, last_name, username, email } = req.body;
   User.update(
     {
       first_name: first_name,
       last_name: last_name,
       username: username,
       email: email,
-      role: role,
     },
     { where: { id: req.params.id } }
   )
     .then((user) => {
       req.flash("success_msg", "User updated successfully");
-      res.redirect("/views/users/index.ejs");
+      res.redirect("/dashboard");
     })
     .catch((err) => console.log(err));
 };
@@ -146,7 +139,7 @@ export const getDeleteUser = async (req, res) => {
   User.destroy({ where: { id: req.params.id } })
     .then((user) => {
       req.flash("success_msg", "User deleted successfully");
-      res.redirect("/views/users/index.ejs");
+      res.redirect("/dashboard");
     })
     .catch((err) => console.log(err));
 };
@@ -157,7 +150,7 @@ export const getLogout = (req, res) => {
       console.log(err);
     } else {
       req.flash("success_msg", "You are logged out");
-      res.redirect("/views/users/login.ejs");
+      res.redirect("/users/login");
     }
   });
 };

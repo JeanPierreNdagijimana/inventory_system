@@ -4,7 +4,6 @@ import { db } from "../config/db.js";
 import Device_type from "../models/Device_type.js";
 import {
   getDeviceTypes,
-  postDeviceTypes,
   getAddDeviceType,
   postAddDeviceType,
   getEditDeviceType,
@@ -16,7 +15,6 @@ const DeviceTypeRouter = express.Router();
 
 //show all device types
 DeviceTypeRouter.get("/", getDeviceTypes);
-DeviceTypeRouter.post("/", postDeviceTypes);
 
 //add device type
 DeviceTypeRouter.get("/new", getAddDeviceType);

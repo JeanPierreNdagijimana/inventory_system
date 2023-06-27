@@ -1,4 +1,3 @@
-//ejs to display all departments in a table
 <table class="table table-striped table-bordered">
 
     <thead>
@@ -6,8 +5,6 @@
         <tr>
 
             <th>Department name</th>
-
-            <th>Department code</th>
 
         </tr>
 
@@ -21,15 +18,13 @@
 
                 <td><%= departments[i].name %></td>
 
-                <td><%= departments[i].code %></td>
-
                 <td>
 
-                    <a href="/departments/<%= departments[i]._id %>" class="btn btn-primary">View</a>
+                    <!-- <a href="/departments/<%= departments[i]._id %>" class="btn btn-primary">View</a> -->
 
-                    <a href="/departments/<%= departments[i]._id %>/edit" class="btn btn-warning">Edit</a>
+                    <!-- <a href="/departments/<%= departments[i]._id %>/edit" class="btn btn-warning">Edit</a> -->
 
-                    <form action="/departments/<%= departments[i]._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+                    <form action="/departments/<%= departments[i].id %>" method="POST" style="display: inline-block;">
 
                         <button class="btn btn-danger">Delete</button>
 
@@ -42,3 +37,8 @@
         <% } %>
 
     </tbody>
+    </table>
+    <div>
+        <a href="/departments/new" class="btn btn-primary">Add New Department</a>
+        <a href="/dashboard" class="btn btn-primary">Go back to dashboard</a>
+    </div>

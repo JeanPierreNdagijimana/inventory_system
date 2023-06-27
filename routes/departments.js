@@ -2,7 +2,6 @@ import express from "express";
 import Department from "../models/Department.js";
 import {
   getDepartments,
-  postDepartments,
   getNewDepartment,
   postNewDepartment,
   getEditDepartment,
@@ -14,7 +13,6 @@ const DepartmentRouter = express.Router();
 
 //show all departments
 DepartmentRouter.get("/", getDepartments);
-DepartmentRouter.post("/", postDepartments);
 
 //new department page
 DepartmentRouter.get("/new", getNewDepartment);

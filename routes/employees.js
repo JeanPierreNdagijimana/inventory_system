@@ -3,7 +3,6 @@ import {
   getEmployee,
   postEmployee,
   getEmployeeList,
-  postEmployeeList,
   getEmployeeEdit,
   postEmployeeEdit,
   getEmployeeDelete,
@@ -18,7 +17,6 @@ EmployeeRouter.post("/new", postEmployee);
 
 //get employee list
 EmployeeRouter.get("/", getEmployeeList);
-EmployeeRouter.post("/", postEmployeeList);
 
 //edit employee
 EmployeeRouter.get("/edit/:id", getEmployeeEdit);

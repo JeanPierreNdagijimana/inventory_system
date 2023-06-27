@@ -1,4 +1,4 @@
-import Employee from "../models/employee.js";
+import Employee from "../models/Employee.js";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 import passportStrategy from "../config/passport.js";
@@ -47,18 +47,13 @@ export const postEmployee = (req, res) => {
     })
       .then((employee) => {
         req.flash("success_msg", "Employee added successfully");
-        res.redirect("/employee");
+        res.redirect("/employees");
       })
       .catch((err) => console.log(err));
   }
 };
 
 export const getEmployeeList = async (req, res) => {
-  const employees = await Employee.findAll();
-  res.render("employees/index.ejs", { employees: employees });
-};
-
-export const postEmployeeList = async (req, res) => {
   const employees = await Employee.findAll();
   res.render("employees/index.ejs", { employees: employees });
 };
@@ -112,7 +107,7 @@ export const postEmployeeEdit = async (req, res) => {
     )
       .then((employee) => {
         req.flash("success_msg", "Employee updated successfully");
-        res.redirect("/employee");
+        res.redirect("/employees");
       })
       .catch((err) => console.log(err));
   }
@@ -126,5 +121,5 @@ export const getEmployeeDelete = async (req, res) => {
 export const postEmployeeDelete = async (req, res) => {
   await Employee.destroy({ where: { id: req.params.id } });
   req.flash("success_msg", "Employee deleted successfully");
-  res.redirect("/employee");
+  res.redirect("/employees");
 };

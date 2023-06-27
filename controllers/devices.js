@@ -16,44 +16,26 @@ export const getDevices = async (req, res) => {
     console.log(err);
   }
 };
-export const postDevices = async (req, res) => {
-  try {
-    const devices = await Device.findAll();
-    res.render("devices/index.ejs", {
-      devices,
-    });
-  } catch (err) {
-    console.log(err);
-  }
+
+//get new device page
+export const getNewDevice = (req, res) => {
+  res.render("devices/new.ejs");
 };
 
-//new device page
-export const getNewDevice = async (req, res) => {
-  try {
-    const device_types = await Device_type.findAll();
-    res.render("devices/new.ejs", {
-      device_types,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-  // res.render("devices/new.ejs");
-};
-
-//add device
+//post new device
 export const postNewDevice = (req, res) => {
-  const { device_type_id, model, serial_number, code, status } = req.body;
+  const { device_type_name, model, serial_number, code, status } = req.body;
   let errors = [];
 
   //check required fields
-  if (!device_type_id || !model || !serial_number || !code || !status) {
+  if (!device_type_name || !model || !serial_number || !code || !status) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("devices/new.ejs", {
       errors,
-      device_type_id,
+      device_type_name,
       model,
       serial_number,
       code,
@@ -62,7 +44,7 @@ export const postNewDevice = (req, res) => {
   } else {
     //validation passed
     Device.create({
-      device_type_id,
+      device_type_name,
       model,
       serial_number,
       code,
@@ -70,8 +52,20 @@ export const postNewDevice = (req, res) => {
     })
       .then((device) => {
         req.flash("success_msg", "Device added successfully");
-        res.redirect("/device");
+        res.redirect("/devices");
       })
       .catch((err) => console.log(err));
+  }
+};
+
+//delete device
+export const deleteDevice = async (req, res) => {
+  try {
+    const device = await Device.findByPk(req.params.id);
+    await device.destroy();
+    req.flash("success_msg", "Device deleted successfully");
+    res.redirect("/devices");
+  } catch (err) {
+    console.log(err);
   }
 };

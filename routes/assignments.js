@@ -2,7 +2,6 @@ import express from "express";
 import Assignment from "../models/Assignment.js";
 import {
   getAssignments,
-  postAssignments,
   getNewAssignment,
   postNewAssignment,
   getEditAssignment,
@@ -14,7 +13,6 @@ const AssignmentRouter = express.Router();
 
 //show all assignments
 AssignmentRouter.get("/", getAssignments);
-AssignmentRouter.post("/", postAssignments);
 
 //new assignment page
 AssignmentRouter.get("/new", getNewAssignment);

@@ -7,55 +7,55 @@
         <%- include ('../partials/messages'); -%>
         <form action="/devices/new" method="POST">
           <div class="form-group">
-            <label for="device_type_name">Device Type name</label>
-            <select class= "form-control" name="devices" id="devices">
+            <label for="name">Device Type name</label>
+            <select class= "form-control" name="device_type_name" id="device_type_name">
               <option value="1">headphones</option>
               <option value="2">laptop</option>
               <option value="3">phone</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="device_model">Devide model</label>
+            <label for="model">Devide model</label>
             <input
               type="text"
-              id="device_model"
-              name="device_model"
+              id="model"
+              name="model"
               class="form-control"
               placeholder="Enter device model"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof model != 'undefined' ? model : '' %>"
             />
           </div>
           <div class="form-group">
-            <label for="device_serial_number">Device serial number</label>
+            <label for="serial_number">Device serial number</label>
             <input
               type="text"
-              id="device_serial_number"
-              name="device_serial_number"
+              id="serial_number"
+              name="serial_number"
               class="form-control"
               placeholder="Enter Device Serial number"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof serial_number != 'undefined' ? serial_number : '' %>"
             />
           </div>
           <div class="form-group">
-            <label for="device_code">Device code</label>
+            <label for="code">Device code</label>
             <input
               type="text"
-              id="device_code"
-              name="device_code"
+              id="code"
+              name="code"
               class="form-control"
               placeholder="Enter device code"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof code != 'undefined' ? code : '' %>"
             />
           </div>
           <div class="form-group">
-            <label for="device_status">Device status</label>
+            <label for="status">Device status</label>
             <input
               type="int"
-              id="device_status"
-              name="device_status"
+              id="status"
+              name="status"
               class="form-control"
               placeholder="1 for fuctional, 0 for non-functional, 2 for under maintenance"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof status != 'undefined' ? status : '' %>"
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">
