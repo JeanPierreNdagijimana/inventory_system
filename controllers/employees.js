@@ -3,15 +3,22 @@ import bcrypt from "bcryptjs";
 import passport from "passport";
 import passportStrategy from "../config/passport.js";
 import e from "connect-flash";
+import Department from "../models/Department.js";
 passportStrategy(passport);
 
-export const getEmployee = async (req, res) => res.render("employees/new.ejs");
+export const getEmployee = async (req, res) => {
+  const department_names = await Department.findAll();
+  console.log(department_names);
+
+  res.render("employees/new.ejs", { department_names });
+};
+
 export const postEmployee = (req, res) => {
-  const { firstName, lastName, email, country, name } = req.body;
+  const { firstName, lastName, email, country, department_names } = req.body;
   let errors = [];
 
   //check required fields
-  if (!firstName || !lastName || !email || !country || !name) {
+  if (!firstName || !lastName || !email || !country || !department_names) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
@@ -22,7 +29,7 @@ export const postEmployee = (req, res) => {
       lastName,
       email,
       country,
-      name,
+      department_names,
     });
   } else {
     //validation passed
@@ -31,7 +38,7 @@ export const postEmployee = (req, res) => {
       lastName,
       email,
       country,
-      name,
+      department_names,
     })
       .then((employee) => {
         req.flash("success_msg", "Employee added successfully");

@@ -38,36 +38,36 @@ db.authenticate()
   .catch((err) => console.log("Error: " + err));
 
 //define associations
-// User.belongsTo(Role, {
-//   foreignKey: {
-//     name: "role_id",
-//   },
-//   as: "role",
-// });
+User.belongsTo(Role, {
+  foreignKey: {
+    name: "roles_id",
+  },
+  as: "role",
+});
 
 Employee.belongsTo(Department, {
   foreignKey: {
-    name: "departments.id",
+    name: "departments_id",
   },
-  as: "departments",
+  as: "department",
 });
 
 Device.belongsTo(Device_type, {
   foreignKey: {
-    name: "id",
+    name: "device_types_id",
   },
-  as: "device_type_name",
+  as: "device_type",
 });
 
 Employee.belongsToMany(Device, {
   through: Assignment,
-  foreignKey: "employees.id",
+  foreignKey: "employees_id",
   as: "devices",
 });
 
 Device.belongsToMany(Employee, {
   through: Assignment,
-  foreignKey: "devices.id",
+  foreignKey: "devices_id",
   as: "employees",
 });
 

@@ -10,7 +10,7 @@
             <label for="name">Device Type name</label>
             <select class= "form-control" name="name" id="name">
               <% device_types.forEach(function(Device_type) { %>
-              <option value="<%=device_types.name %>"><%=device_types.name %></option>
+              <option value="<%=Device_type.name %>"><%=Device_type.name %></option>
               <% }); %>
             </select>
           </div>

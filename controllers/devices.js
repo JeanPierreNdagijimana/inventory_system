@@ -18,28 +18,12 @@ export const getDevices = async (req, res) => {
   }
 };
 
-//get new device page
-// export const getNewDevice = (req, res) => {
-//   res.render("devices/new.ejs");
-// };
-
 export const getNewDevice = async (req, res) => {
-  // Assuming you have an array of device types called 'deviceTypes'
-  // const Device_type = [
-  //   //device type names from device_type table
-  //   { id: 1, name: "Laptop" },
-  //   { id: 2, name: "Desktop" },
-  //   { id: 3, name: "Monitor" },
-  //   { id: 4, name: "Keyboard" },
-  // ];
+  const device_types = await Device_type.findAll();
+  console.log(device_types);
 
-  const device_type = await Device_type.findAll();
-  console.log(device_type);
-
-  res.render("devices/new.ejs", { device_type });
+  res.render("devices/new.ejs", { device_types });
 };
-
-//get all device_type from device_type table
 
 //post new device
 export const postNewDevice = (req, res) => {

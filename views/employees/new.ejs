@@ -53,23 +53,11 @@
           <div class="form-group">
             <label for="name">Department name</label>
             <select class= "form-control" name="name" id="name">
-              <% departments.forEach(function(department) { %>
-              <option value="<%=department.name %>"><%=department.name %></option>
+              <% department_names.forEach(function(dpmt) { %>
+              <option value="<%=dpmt.name %>"><%=dpmt.name %></option>
               <% }); %>
-            </select>
-            />	
+            </select>	
           </div>
-          <!-- <div class="form-group">
-            <label for="department">Department</label>
-            <input
-              type="text"
-              id="department"
-              name="department"
-              class="form-control"
-              placeholder="Enter Department"
-              value="<%= typeof Department != 'undefined' ? Department : '' %>"
-            />
-          </div> -->
           <button type="submit" class="btn btn-primary btn-block">
             Add Employee
           </button>
