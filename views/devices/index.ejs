@@ -11,11 +11,11 @@
     <tbody>
         <% devices.forEach(function(device) { %>
             <tr>
-                <td><%= device_types.name %></td>
-                <td><%= devices.model %></td>
-                <td><%= devices.serial_number %></td>
-                <td><%= devices.code %></td>
-                <td><%= devices.status %></td>
+                <td><%= device.device_type.name %></td>
+                <td><%= device.model %></td>
+                <td><%= device.serial_number %></td>
+                <td><%= device.code %></td>
+                <td><%= device.status %></td>
                 <td>
                     <form action="/devices/<%= devices.id %>?_method=DELETE" method="POST" style="display: inline-block;">
                         <button class="btn btn-danger">Delete</button>

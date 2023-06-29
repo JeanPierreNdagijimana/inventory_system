@@ -9,7 +9,9 @@ import { name } from "ejs";
 //show all devices
 export const getDevices = async (req, res) => {
   try {
-    const devices = await Device.findAll();
+    const devices = await Device.findAll({
+      include: "device_type",
+    });
     res.render("devices/index.ejs", {
       devices,
     });
@@ -27,31 +29,29 @@ export const getNewDevice = async (req, res) => {
 
 //post new device
 export const postNewDevice = (req, res) => {
-  const { device_types, model, serial_number, code, status } = req.body;
+  const { device_types_id, model, serial_number, code, status } = req.body;
   let errors = [];
 
   //check required fields
-  if (!device_types || !model || !serial_number || !code || !status) {
+  if (!device_types_id || !model || !serial_number || !code) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("devices/new.ejs", {
       errors,
-      device_types,
+      device_types_id,
       model,
       serial_number,
       code,
-      status,
     });
   } else {
     //validation passed
     Device.create({
-      device_types,
+      device_types_id,
       model,
       serial_number,
       code,
-      status,
     })
       .then((device) => {
         req.flash("success_msg", "Device added successfully");

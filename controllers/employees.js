@@ -6,6 +6,15 @@ import e from "connect-flash";
 import Department from "../models/Department.js";
 passportStrategy(passport);
 
+//get all employees
+export const getEmployeeList = async (req, res) => {
+  const employees = await Employee.findAll({
+    include: "department",
+  });
+  res.render("employees/index.ejs", { employees });
+};
+
+//get new employee
 export const getEmployee = async (req, res) => {
   const department_names = await Department.findAll();
   console.log(department_names);
@@ -13,32 +22,34 @@ export const getEmployee = async (req, res) => {
   res.render("employees/new.ejs", { department_names });
 };
 
+//post new employee
 export const postEmployee = (req, res) => {
-  const { firstName, lastName, email, country, department_names } = req.body;
+  const { first_name, last_name, email, country, department_names_id } =
+    req.body;
   let errors = [];
 
   //check required fields
-  if (!firstName || !lastName || !email || !country || !department_names) {
+  if (!first_name || !last_name || !email || !country || !department_names_id) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("employees/new.ejs", {
       errors,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email,
       country,
-      department_names,
+      department_names_id,
     });
   } else {
     //validation passed
     Employee.create({
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email,
       country,
-      department_names,
+      departments_id: department_names_id,
     })
       .then((employee) => {
         req.flash("success_msg", "Employee added successfully");
@@ -46,11 +57,6 @@ export const postEmployee = (req, res) => {
       })
       .catch((err) => console.log(err));
   }
-};
-
-export const getEmployeeList = async (req, res) => {
-  const employees = await Employee.findAll();
-  res.render("employees/index.ejs", { employees: employees });
 };
 
 export const getEmployeeEdit = async (req, res) => {

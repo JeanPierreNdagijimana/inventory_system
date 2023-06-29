@@ -8,9 +8,9 @@
         <form action="/devices/new" method="POST">
           <div class="form-group">
             <label for="name">Device Type name</label>
-            <select class= "form-control" name="name" id="name">
+            <select class= "form-control" name="device_types_id" id="device_types_id">
               <% device_types.forEach(function(Device_type) { %>
-              <option value="<%=Device_type.name %>"><%=Device_type.name %></option>
+              <option value="<%=Device_type.id %>"><%=Device_type.name %></option>
               <% }); %>
             </select>
           </div>
@@ -45,17 +45,6 @@
               class="form-control"
               placeholder="Enter device code"
               value="<%= typeof code != 'undefined' ? code : '' %>"
-            />
-          </div>
-          <div class="form-group">
-            <label for="status">Device status</label>
-            <input
-              type="int"
-              id="status"
-              name="status"
-              class="form-control"
-              placeholder="1 for fuctional, 0 for non-functional, 2 for under maintenance"
-              value="<%= typeof status != 'undefined' ? status : '' %>"
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">

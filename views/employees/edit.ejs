@@ -18,9 +18,11 @@
         <input type="text" id="country" name="country" value="<%= employee.country %>">
     </div>
     <div>
-        <label for="department">department</label>
-        <input type="text" id="department" name="department" value="<%= employee.department %>">
-    </div>
-    
-   
+        <label for="department_names">department</label>
+        <input type="text" id="department_names" name="department_names" value="<%= department_names.name %>">
+    </div> 
 </form>
+<div>
+    <a href="/employees/new" class="btn-primary">Add new Employee</a>
+    <a href="/dashboard" class="btn-primary">Go back to dashboard</a>
+</div>

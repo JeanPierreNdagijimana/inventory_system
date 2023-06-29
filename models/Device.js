@@ -18,6 +18,7 @@ const Device = db.define(
     },
     status: {
       type: Sequelize.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
   },
