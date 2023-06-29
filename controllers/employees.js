@@ -7,43 +7,31 @@ passportStrategy(passport);
 
 export const getEmployee = async (req, res) => res.render("employees/new.ejs");
 export const postEmployee = (req, res) => {
-  const {
-    employee_firstName,
-    employee_lastName,
-    employee_email,
-    employee_phone,
-    department_name,
-  } = req.body;
+  const { firstName, lastName, email, country, name } = req.body;
   let errors = [];
 
   //check required fields
-  if (
-    !employee_firstName ||
-    !employee_lastName ||
-    !employee_email ||
-    !employee_phone ||
-    !department_name
-  ) {
+  if (!firstName || !lastName || !email || !country || !name) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("employees/new.ejs", {
       errors,
-      employee_firstName,
-      employee_lastName,
-      employee_email,
-      employee_phone,
-      department_name,
+      firstName,
+      lastName,
+      email,
+      country,
+      name,
     });
   } else {
     //validation passed
     Employee.create({
-      employee_firstName,
-      employee_lastName,
-      employee_email,
-      employee_phone,
-      department_name,
+      firstName,
+      lastName,
+      email,
+      country,
+      name,
     })
       .then((employee) => {
         req.flash("success_msg", "Employee added successfully");
@@ -64,44 +52,32 @@ export const getEmployeeEdit = async (req, res) => {
 };
 
 export const postEmployeeEdit = async (req, res) => {
-  const {
-    employee_firstName,
-    employee_lastName,
-    employee_email,
-    employee_phone,
-    department_name,
-  } = req.body;
+  const { firstName, lastName, email, country, name } = req.body;
   let errors = [];
 
   //check required fields
-  if (
-    !employee_firstName ||
-    !employee_lastName ||
-    !employee_email ||
-    !employee_phone ||
-    !department_name
-  ) {
+  if (!firstName || !lastName || !email || !country || !name) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("employees/edit.ejs", {
       errors,
-      employee_firstName,
-      employee_lastName,
-      employee_email,
-      employee_phone,
-      department_name,
+      firstName,
+      lastName,
+      email,
+      country,
+      name,
     });
   } else {
     //validation passed
     Employee.update(
       {
-        employee_firstName,
-        employee_lastName,
-        employee_email,
-        employee_phone,
-        department_name,
+        firstName,
+        lastName,
+        email,
+        country,
+        name,
       },
       { where: { id: req.params.id } }
     )
