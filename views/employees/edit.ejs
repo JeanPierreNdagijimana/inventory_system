@@ -1,26 +1,26 @@
-//ejs code to edit employee
 <%- include('../partials/header') %>
 <h1>Edit Employee</h1>
-<form action="/employees/<%= employee._id %>?_method=PUT" method="POST">
+<form action="/employees/<%= employee.id %>?_method=PUT" method="POST">
     <div>
-        <label for="employee[name]">Name:</label>
-        <input type="text" name="employee[name]" value="<%= employee.name %>">
+        <label for="employee_firstName">First Name</label>
+        <input type="text" id="employee_firstName" name="employee_firstName" value="<%= employee.employee_firstName %>">
     </div>
     <div>
-        <label for="employee[title]">Title:</label>
-        <input type="text" name="employee[title]" value="<%= employee.title %>">
+        <label for="employee_lastName">Last Name</label>
+        <input type="text" id="employee_lastName" name="employee_lastName" value="<%= employee.employee_lastName %>">
     </div>
     <div>
-        <label for="employee[department]">Department:</label>
-        <input type="text" name="employee[department]" value="<%= employee.department %>">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= employee.email %>">
     </div>
     <div>
-        <label for="employee[salary]">Salary:</label>
-        <input type="text" name="employee[salary]" value="<%= employee.salary %>">
+        <label for="country">Phone</label>
+        <input type="text" id="country" name="country" value="<%= employee.country %>">
     </div>
     <div>
-        <label for="employee[manager]">Manager:</label>
-        <input type="checkbox" name="employee[manager]" <% if(employee.manager){ %> checked <% } %>>
+        <label for="department">department</label>
+        <input type="text" id="department" name="department" value="<%= employee.department %>">
     </div>
-    <input type="submit" value="Update Employee">
+    
+   
 </form>

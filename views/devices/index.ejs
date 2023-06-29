@@ -9,22 +9,20 @@
         </tr>
     </thead>
     <tbody>
-        <% for(var i=0; i<devices.length; i++) {%>
+        <% devices.forEach(function(device) { %>
             <tr>
-                <td><%= devices[i]device_type_name %></td>
-                <td><%= devices[i].model %></td>
-                <td><%= devices[i].serial_number %></td>
-                <td><%= devices[i].code %></td>
-                <td><%= devices[i].status %></td>
+                <td><%= devices.name %></td>
+                <td><%= devices.model %></td>
+                <td><%= devices.serial_number %></td>
+                <td><%= devices.code %></td>
+                <td><%= devices.status %></td>
                 <td>
-                    <!-- <a href="/devices/<%= devices[i]._id %>" class="btn btn-primary">View</a> -->
-                    <!-- <a href="/devices/<%= devices[i]._id %>/edit" class="btn btn-warning">Edit</a> -->
-                    <form action="/devices/<%= devices[i].id %>?_method=DELETE" method="POST" style="display: inline-block;">
+                    <form action="/devices/<%= devices.id %>?_method=DELETE" method="POST" style="display: inline-block;">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>
-        <% } %>
+            <% }); %>
     </tbody>
 </table>
 <div>

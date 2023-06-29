@@ -7,47 +7,36 @@
         <%- include ('../partials/messages'); -%>
         <form action="/employees/new" method="POST">
           <div class="form-group">
-            <label for="employee_firstName">First Name</label>
+            <label for="firstName">First Name</label>
             <input
               type="text"
-              id="employee_firstName"
-              name="employee_firstName"
+              id="firstName"
+              name="firstName"
               class="form-control"
               placeholder="Enter First Name"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof firstName != 'undefined' ? firstName : '' %>"
             />
           </div>
           <div class="form-group">
-            <label for="employee_lastName">Last Name</label>
+            <label for="lastName">Last Name</label>
             <input
               type="text"
-              id="employee_lastName"
-              name="employee_lastName"
+              id="lastName"
+              name="lastName"
               class="form-control"
               placeholder="Enter Name"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof lastName != 'undefined' ? lastName : '' %>"
             />
           </div>
           <div class="form-group">
-            <label for="employee_email">Email</label>
+            <label for="email">Email</label>
             <input
               type="email"
-              id="employee_email"
-              name="employee_email"
+              id="email"
+              name="email"
               class="form-control"
               placeholder="Enter Email"
               value="<%= typeof email != 'undefined' ? email : '' %>"
-            />
-          </div>
-          <div class="form-group">
-            <label for="department">Department</label>
-            <input
-              type="text"
-              id="department"
-              name="department"
-              class="form-control"
-              placeholder="Enter Username"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
             />
           </div>
           <div class="form-group">
@@ -58,9 +47,29 @@
               name="country"
               class="form-control"
               placeholder="Enter country"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              value="<%= typeof country != 'undefined' ? country : '' %>"
             />
           </div>
+          <div class="form-group">
+            <label for="name">Department name</label>
+            <select class= "form-control" name="name" id="name">
+              <% departments.forEach(function(department) { %>
+              <option value="<%=department.name %>"><%=department.name %></option>
+              <% }); %>
+            </select>
+            />	
+          </div>
+          <!-- <div class="form-group">
+            <label for="department">Department</label>
+            <input
+              type="text"
+              id="department"
+              name="department"
+              class="form-control"
+              placeholder="Enter Department"
+              value="<%= typeof Department != 'undefined' ? Department : '' %>"
+            />
+          </div> -->
           <button type="submit" class="btn btn-primary btn-block">
             Add Employee
           </button>

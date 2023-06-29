@@ -2,6 +2,7 @@ import express from "express";
 import Device from "../models/Device.js";
 import Device_type from "../models/Device_type.js";
 import e from "connect-flash";
+import { name } from "ejs";
 
 // const DeviceRouter = express.Router();
 
@@ -18,24 +19,42 @@ export const getDevices = async (req, res) => {
 };
 
 //get new device page
-export const getNewDevice = (req, res) => {
-  res.render("devices/new.ejs");
+// export const getNewDevice = (req, res) => {
+//   res.render("devices/new.ejs");
+// };
+
+export const getNewDevice = async (req, res) => {
+  // Assuming you have an array of device types called 'deviceTypes'
+  // const Device_type = [
+  //   //device type names from device_type table
+  //   { id: 1, name: "Laptop" },
+  //   { id: 2, name: "Desktop" },
+  //   { id: 3, name: "Monitor" },
+  //   { id: 4, name: "Keyboard" },
+  // ];
+
+  const device_type = await Device_type.findAll();
+  console.log(device_type);
+
+  res.render("devices/new.ejs", { device_type });
 };
+
+//get all device_type from device_type table
 
 //post new device
 export const postNewDevice = (req, res) => {
-  const { device_type_name, model, serial_number, code, status } = req.body;
+  const { device_types, model, serial_number, code, status } = req.body;
   let errors = [];
 
   //check required fields
-  if (!device_type_name || !model || !serial_number || !code || !status) {
+  if (!device_types || !model || !serial_number || !code || !status) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("devices/new.ejs", {
       errors,
-      device_type_name,
+      device_types,
       model,
       serial_number,
       code,
@@ -44,7 +63,7 @@ export const postNewDevice = (req, res) => {
   } else {
     //validation passed
     Device.create({
-      device_type_name,
+      device_types,
       model,
       serial_number,
       code,

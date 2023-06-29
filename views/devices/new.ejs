@@ -8,10 +8,10 @@
         <form action="/devices/new" method="POST">
           <div class="form-group">
             <label for="name">Device Type name</label>
-            <select class= "form-control" name="device_type_name" id="device_type_name">
-              <option value="1">headphones</option>
-              <option value="2">laptop</option>
-              <option value="3">phone</option>
+            <select class= "form-control" name="name" id="name">
+              <% device_types.forEach(function(Device_type) { %>
+              <option value="<%=device_types.name %>"><%=device_types.name %></option>
+              <% }); %>
             </select>
           </div>
           <div class="form-group">

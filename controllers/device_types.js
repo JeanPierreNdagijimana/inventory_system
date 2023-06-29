@@ -1,10 +1,10 @@
 import express from "express";
-import DeviceType from "../models/Device_type.js";
+import Device_type from "../models/Device_type.js";
 import e from "connect-flash";
 
 //show all device types
 export const getDeviceTypes = async (req, res) => {
-  const device_types = await DeviceType.findAll();
+  const device_types = await Device_type.findAll();
 
   res.render("device_types/index.ejs", { device_types });
 };
@@ -32,7 +32,7 @@ export const postAddDeviceType = (req, res) => {
     });
   } else {
     //validation passed
-    DeviceType.create({
+    Device_type.create({
       name,
       prefix,
     })
@@ -47,7 +47,7 @@ export const postAddDeviceType = (req, res) => {
 //edit device type
 export const getEditDeviceType = async (req, res) => {
   //check if id exists
-  const device_type = await DeviceType.findByPk(req.params.id);
+  const device_type = await Device_type.findByPk(req.params.id);
   if (!device_type) {
     req.flash("error_msg", "Device type does not exit");
     res.redirect("/device_types");
@@ -64,7 +64,7 @@ export const postEditDeviceType = async (req, res) => {
   if (!name || !prefix) {
     errors.push({ msg: "Please fill in all fields" });
   }
-  const device_type = await DeviceType.findByPk(req.params.id);
+  const device_type = await Device_type.findByPk(req.params.id);
   //check if there are errors
   if (errors.length > 0) {
     res.render("device_types/edit.ejs", {
@@ -73,7 +73,7 @@ export const postEditDeviceType = async (req, res) => {
     });
   } else {
     //validation passed
-    DeviceType.update({ name, prefix }, { where: { id: req.params.id } })
+    Device_type.update({ name, prefix }, { where: { id: req.params.id } })
       .then((device_type) => {
         req.flash("success_msg", "Device type updated successfully");
         res.redirect("/device_types");
@@ -84,7 +84,7 @@ export const postEditDeviceType = async (req, res) => {
 
 //delete device type
 export const deleteDeviceType = async (req, res) => {
-  const device_type = await DeviceType.findByPk(req.params.id);
+  const device_type = await Device_type.findByPk(req.params.id);
 
   device_type.destroy();
   req.flash("success_msg", "Device type deleted successfully");

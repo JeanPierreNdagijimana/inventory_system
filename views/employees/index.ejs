@@ -33,15 +33,15 @@
 
                 <td><%= employees[i].address %></td>
 
-                <td><%= employees[i].department %></td>
+                <td><%= employees[i].name %></td>
 
                 <td>
 
-                    <a href="/employees/<%= employees[i]._id %>" class="btn btn-primary">View</a>
+                    <a href="/employees/<%= employees[i].id %>" class="btn btn-primary">View</a>
 
-                    <a href="/employees/<%= employees[i]._id %>/edit" class="btn btn-warning">Edit</a>
+                    <a href="/employees/<%= employees[i].id %>/edit" class="btn btn-warning">Edit</a>
 
-                    <form action="/employees/<%= employees[i]._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+                    <form action="/employees/<%= employees[i].id %>?_method=DELETE" method="POST" style="display: inline-block;">
 
                         <button class="btn btn-danger">Delete</button>
 
