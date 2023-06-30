@@ -4,27 +4,22 @@
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Assign a device </h1>
         <%- include ('../partials/messages'); -%>
         <form action="/assignments/new" method="POST">
-            <div class="form-group">
-                <label for="employee_email">Email</label>
-                <input
-                  type="email"
-                  id="employee_email"
-                  name="employee_email"
-                  class="form-control"
-                  placeholder="Enter Email"
-                  value="<%= typeof email != 'undefined' ? email : '' %>"
-                />
-              </div>
-          <div class="form-group">
-            <label for="device_serial_number">Device serial number</label>
-            <input
-              type="text"
-              id="device_serial_number"
-              name="device_serial_number"
-              class="form-control"
-              placeholder="Enter device type prefix"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
-            />
+          <div>
+            <label for="employees_id">Select Employee:</label>
+            <select id="employees_id" name="employees_id">
+              <% employees.forEach(employee => { %>
+                <option value="<%= employee.id %>"><%= employee.email %></option>
+              <% }) %>
+            </select>
+          </div>
+        
+          <div>
+            <label for="devices_id">Select Device:</label>
+            <select id="devices_id" name="devices_id">
+              <% devices.forEach(device => { %>
+                <option value="<%= device.id %>"><%= device.serial_number %></option>
+              <% }) %>
+            </select>
           </div>
           <div class="form-group">
             <label for="status">status</label>
@@ -34,12 +29,19 @@
               name="status"
               class="form-control"
               placeholder="1 for active, 0 for inactive"
-              <!-- value="<%= typeof name != 'undefined' ? name : '' %>" -->
-            />
+              <!-- value="<%= typeof status != 'undefined' ? status : '' %>" -->
           </div>
           <button type="submit" class="btn btn-primary btn-block">Save</button>
         </form>
       </div>
     </div>
   </div>
+  <script>
+    // Initialize Select2 for the employee and device select inputs
+    $(document).ready(function() {
+      $('#employees_id').select2();
+      $('#devices_id').select2();
+    });
+  </script>
+
   

@@ -14,10 +14,13 @@ export const getAssignments = async (req, res) => {
 export const getNewAssignment = async (req, res) => {
   try {
     // Get all employees
-    const employees = await Employee.findAll();
+    const employees = await Employee.findAll({
+      attributes: ["id", "email"],
+    });
 
     // query all devices that are not assigned (status = 0)
     const devices = await Device.findAll({
+      attributes: ["id", "serial_number"],
       where: {
         status: 0,
       },

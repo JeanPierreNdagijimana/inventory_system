@@ -1,7 +1,45 @@
-//ejs code to edit an assignment
 <% include ../partials/header %>
 <h1>Edit Assignment</h1>
-
+<form action="/assignments/<%= assignment.id %>?_method=PUT" method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Enter Email"
+          value="<%= typeof email != 'undefined' ? email : '' %>"
+        />
+      </div>
+  <div class="form-group">
+    <label for="serial_number">Device serial number</label>
+    <input
+      type="text"
+      id="serial_number"
+      name="serial_number"
+      class="form-control"
+      placeholder="Enter device type prefix"
+      value="<%= typeof serial_number != 'undefined' ? serial_number : '' %>"
+    />
+  </div>
+  <div class="form-group">
+    <label for="status">status</label>
+    <input
+      type="int"
+      id="status"
+      name="status"
+      class="form-control"
+      placeholder="1 for active, 0 for inactive"
+      <!-- value="<%= typeof status != 'undefined' ? status : '' %>" -->
+    />
+  </div>
+  <button type="submit" class="btn btn-primary btn-block">Save</button>
+</form>
+<div>
+    <a href="/assignments/new" class="btn btn-primary">Add New Assignment</a>
+    <a href="/dashboard" class="btn btn-primary">Go back to dashboard</a>
+</div>
 
 
 
