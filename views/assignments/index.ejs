@@ -4,6 +4,8 @@
     <thead>
         <tr>
             <th>Employee email</th>
+            <th>Device code</th>
+            <th>Device model</th>
             <th>Device serial number</th>
             <th>Status</th>
             <th>Created at</th>
@@ -15,8 +17,10 @@
     <tbody>
         <% assignments.forEach(function(assignment){ %>
         <tr>
-            <td><%= assignment.employee_email %></td>
-            <td><%= assignment.device_serial_number %></td>
+            <td><%= assignment.employees.email %></td>
+            <td><%= assignment.devices.code %></td>
+            <td><%= assignment.devices.model %></td>
+            <td><%= assignment.devices.serial_number %></td>
             <td><%= assignment.status %></td>
             <td><%= assignment.createdAt %></td>
             <td><%= assignment.updatedAt %></td>

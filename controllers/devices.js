@@ -29,7 +29,7 @@ export const getNewDevice = async (req, res) => {
 
 //post new device
 export const postNewDevice = (req, res) => {
-  const { device_types_id, model, serial_number, code, status } = req.body;
+  const { device_types_id, model, serial_number, code } = req.body;
   let errors = [];
 
   //check required fields

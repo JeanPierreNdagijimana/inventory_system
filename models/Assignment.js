@@ -12,6 +12,7 @@ const Assignment = db.define(
     },
     status: {
       type: Sequelize.INTEGER,
+      defaultValue: 1,
       allowNull: false,
     },
   },

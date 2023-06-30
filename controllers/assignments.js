@@ -5,7 +5,9 @@ import Employee from "../models/Employee.js";
 
 //get all assignments
 export const getAssignments = async (req, res) => {
-  const assignments = await Assignment.findAll();
+  const assignments = await Assignment.findAll({
+    include: ["devices", "employees"],
+  });
 
   res.render("assignments/index.ejs", { assignments });
 };
@@ -20,7 +22,7 @@ export const getNewAssignment = async (req, res) => {
 
     // query all devices that are not assigned (status = 0)
     const devices = await Device.findAll({
-      attributes: ["id", "serial_number"],
+      attributes: ["id", "code"],
       where: {
         status: 0,
       },
@@ -34,25 +36,23 @@ export const getNewAssignment = async (req, res) => {
 
 //post add assignment page
 export const postNewAssignment = (req, res) => {
-  const { status, devices_id, employees_id } = req.body;
+  const { devices_id, employees_id } = req.body;
   let errors = [];
 
   //check required fields
-  if (!status || !devices_id || !employees_id) {
+  if (!devices_id || !employees_id) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("assignments/new.ejs", {
       errors,
-      status,
       devices_id,
       employees_id,
     });
   } else {
     //validation passed
     Assignment.create({
-      status,
       devices_id,
       employees_id,
     })

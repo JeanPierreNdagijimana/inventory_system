@@ -62,12 +62,14 @@ Device.belongsTo(Device_type, {
 Employee.belongsToMany(Device, {
   through: Assignment,
   foreignKey: "employees_id",
+  otherKey: "devices_id",
   as: "devices",
 });
 
 Device.belongsToMany(Employee, {
   through: Assignment,
   foreignKey: "devices_id",
+  otherKey: "employees_id",
   as: "employees",
 });
 
