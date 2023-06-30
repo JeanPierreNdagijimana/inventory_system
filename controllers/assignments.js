@@ -1,5 +1,7 @@
 import express from "express";
 import Assignment from "../models/Assignment.js";
+import Device from "../models/Device.js";
+import Employee from "../models/Employee.js";
 
 //get all assignments
 export const getAssignments = async (req, res) => {
@@ -9,33 +11,47 @@ export const getAssignments = async (req, res) => {
 };
 
 //get add assignment page
-export const getNewAssignment = (req, res) => {
-  res.render("assignments/new.ejs");
+export const getNewAssignment = async (req, res) => {
+  try {
+    // Get all employees
+    const employees = await Employee.findAll();
+
+    // query all devices that are not assigned (status = 0)
+    const devices = await Device.findAll({
+      where: {
+        status: 0,
+      },
+    });
+    res.render("assignments/new.ejs", { employees, devices });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("internal server error");
+  }
 };
 
 //post add assignment page
 export const postNewAssignment = (req, res) => {
-  const { employee_id, device_id, status } = req.body;
+  const { status, devices_id, employees_id } = req.body;
   let errors = [];
 
   //check required fields
-  if (!employee_id || !device_id || !status) {
+  if (!status || !devices_id || !employees_id) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("assignments/new.ejs", {
       errors,
-      employee_id,
-      device_id,
       status,
+      devices_id,
+      employees_id,
     });
   } else {
     //validation passed
     Assignment.create({
-      employee_id,
-      device_id,
       status,
+      devices_id,
+      employees_id,
     })
       .then((assignment) => {
         req.flash("success_msg", "Assignment added successfully");
@@ -54,28 +70,28 @@ export const getEditAssignment = async (req, res) => {
 
 //post edit assignment page
 export const postEditAssignment = async (req, res) => {
-  const { employee_id, device_id, status } = req.body;
+  const { status, devices_id, employees_id } = req.body;
   let errors = [];
 
   //check required fields
-  if (!employee_id || !device_id || !status) {
+  if (!status || !devices_id || !employees_id) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("assignments/edit.ejs", {
       errors,
-      employee_id,
-      device_id,
       status,
+      devices_id,
+      employees_id,
     });
   } else {
     //validation passed
     Assignment.update(
       {
-        employee_id,
-        device_id,
         status,
+        devices_id,
+        employees_id,
       },
       { where: { id: req.params.id } }
     )

@@ -1,25 +1,7 @@
 //ejs code to edit an assignment
 <% include ../partials/header %>
 <h1>Edit Assignment</h1>
-<form action="/assignments/<%= assignment._id %>?_method=PUT" method="POST">
-    <div>
-        <label for="assignment[name]">Name:</label>
-        <input type="text" name="assignment[name]" value="<%= assignment.name %>">
-    </div>
-    <div>
-        <label for="assignment[description]">Description:</label>
-        <input type="text" name="assignment[description]" value="<%= assignment.description %>">
-    </div>
-    <div>
-        <label for="assignment[difficulty]">Difficulty:</label>
-        <input type="text" name="assignment[difficulty]" value="<%= assignment.difficulty %>">
-    </div>
-    <div>
-        <label for="assignment[completed]">Completed:</label>
-        <input type="checkbox" name="assignment[completed]" <% if(assignment.completed){ %> checked <% } %>>
-    </div>
-    <input type="submit" value="Update Assignment">
-</form>
+
 
 
 
