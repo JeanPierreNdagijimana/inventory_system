@@ -35,7 +35,7 @@ export const getNewAssignment = async (req, res) => {
 };
 
 //post add assignment page
-export const postNewAssignment = (req, res) => {
+export const postNewAssignment = async (req, res) => {
   const { devices_id, employees_id } = req.body;
   let errors = [];
 
@@ -51,16 +51,27 @@ export const postNewAssignment = (req, res) => {
       employees_id,
     });
   } else {
-    //validation passed
-    Assignment.create({
-      devices_id,
-      employees_id,
-    })
-      .then((assignment) => {
-        req.flash("success_msg", "Assignment added successfully");
-        res.redirect("/assignments");
-      })
-      .catch((err) => console.log(err));
+    try {
+      //validation passed
+      const assignment = await Assignment.create({
+        devices_id,
+        employees_id,
+      });
+      // update status in device table
+      await Device.update(
+        {
+          status: 1,
+        },
+        { where: { id: devices_id } }
+      );
+
+      // .then((assignment) => {
+      req.flash("success_msg", "Assignment added successfully");
+      res.redirect("/assignments");
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("internal server error");
+    }
   }
 };
 
@@ -89,20 +100,39 @@ export const postEditAssignment = async (req, res) => {
       employees_id,
     });
   } else {
-    //validation passed
-    Assignment.update(
-      {
-        status,
-        devices_id,
-        employees_id,
-      },
-      { where: { id: req.params.id } }
-    )
-      .then((assignment) => {
-        req.flash("success_msg", "Assignment updated successfully");
-        res.redirect("/assignments");
-      })
-      .catch((err) => console.log(err));
+    try {
+      //validation passed
+      await Assignment.update(
+        {
+          status,
+          devices_id,
+          employees_id,
+        },
+        { where: { id: req.params.id } }
+      );
+
+      // update status in device table
+      if (status == 1) {
+        await Device.update(
+          {
+            status: 1,
+          },
+          { where: { id: devices_id } }
+        );
+      } else {
+        await Device.update(
+          {
+            status: 0,
+          },
+          { where: { id: devices_id } }
+        );
+      }
+      req.flash("success_msg", "Assignment updated successfully");
+      res.redirect("/assignments");
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("internal server error");
+    }
   }
 };
 

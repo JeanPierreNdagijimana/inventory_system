@@ -61,36 +61,41 @@ export const postEmployee = (req, res) => {
 
 export const getEmployeeEdit = async (req, res) => {
   const employee = await Employee.findByPk(req.params.id);
-  res.render("employees/edit.ejs", { employee: employee });
+  const department_names = await Department.findAll();
+  res.render("employees/edit.ejs", {
+    employee: employee,
+    department_names: department_names,
+  });
 };
 
 export const postEmployeeEdit = async (req, res) => {
-  const { firstName, lastName, email, country, name } = req.body;
+  const { first_name, last_name, email, country, department_names_id } =
+    req.body;
   let errors = [];
 
   //check required fields
-  if (!firstName || !lastName || !email || !country || !name) {
+  if (!first_name || !last_name || !email || !country || !department_names_id) {
     errors.push({ msg: "Please fill in all fields" });
   }
   //check if there are errors
   if (errors.length > 0) {
     res.render("employees/edit.ejs", {
       errors,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email,
       country,
-      name,
+      department_names_id,
     });
   } else {
     //validation passed
     Employee.update(
       {
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         email,
         country,
-        name,
+        department_names_id,
       },
       { where: { id: req.params.id } }
     )

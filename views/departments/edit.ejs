@@ -1,40 +1,14 @@
-//ejs code to edit a department
-<% include ../partials/header %>
-<h1>Edit Department</h1>
-<form action="/departments/<%= department._id %>?_method=PUT" method="POST">
-
-    <div>
-
-        <label for="department[name]">Name:</label>
-
-        <input type="text" name="department[name]" value="<%= department.name %>">
-
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Edit Employee
+        </h1>
+            <%- include('../partials/messages'); -%>
+            <form action="/departments/edit/<%= department._id %>" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            
+            </form>
+        </div>
     </div>
-
-    <div>
-
-        <label for="department[description]">Description:</label>
-
-        <input type="text" name="department[description]" value="<%= department.description %>">
-
-    </div>
-
-    <div>
-
-        <label for="department[difficulty]">Difficulty:</label>
-
-        <input type="text" name="department[difficulty]" value="<%= department.difficulty %>">
-
-    </div>
-
-    <div>
-
-        <label for="department[completed]">Completed:</label>
-
-        <input type="checkbox" name="department[completed]" <% if(department.completed){ %> checked <% } %>>
-
-    </div>
-
-    <input type="submit" value="Update Department">
-
-</form>
+</div>

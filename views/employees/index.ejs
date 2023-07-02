@@ -17,9 +17,10 @@
                 <td><%= empl.country %></td>
                 <td><%= empl.department.name %></td>
                 <td>
-                    <a href="/employees/<%= empl.id %>" class="btn btn-primary">View</a>
-                    <a href="/employees/<%= empl.id %>/edit" class="btn btn-warning">Edit</a>
-                    <form action="/employees/<%= empl.id %>?_method=DELETE" method="POST" style="display: inline-block;">
+                    <!-- <a href="/employees/<%= empl.id %>" class="btn btn-primary">View</a> -->
+                    <a href="/employees/edit/<%= empl.id %>" class="btn btn-warning">Edit</a>
+                    <form action="/employees/delete/<%= empl.id %>" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </td>

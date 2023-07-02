@@ -1,45 +1,26 @@
 <table class="table table-striped table-bordered">
 
     <thead>
-
         <tr>
-
             <th>Device type name</th>
-
             <th>Device type prefix</th>
-
         </tr>
-
     </thead>
 
     <tbody>
-
         <% for(var i=0; i<device_types.length; i++) {%>
-
             <tr>
-
                 <td><%= device_types[i].name %></td>
-
                 <td><%= device_types[i].prefix %></td>
-
                 <td>
-
-                    <!-- <a href="/device_types/<%= device_types[i].id %>" class="btn btn-primary">View</a> -->
-
                     <a href="/device_types/edit/<%= device_types[i].id %>" class="btn btn-warning">Edit</a>
-
-                    <form action="/device_types/<%= device_types[i].id %>?_method=DELETE" method="POST" style="display: inline-block;">
-
+                    <form action="/device_types/delete/<%= device_types[i].id %>" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger">Delete</button>
-
                     </form>
-
                 </td>
-
             </tr>
-
         <% } %>
-
     </tbody>
 </table>
 

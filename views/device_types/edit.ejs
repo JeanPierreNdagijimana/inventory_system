@@ -1,12 +1,29 @@
-<h1>Edit Device Type</h1>
-<form action="/device_types/edit/<%= device_type.id %>" method="POST">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="<%= device_type.name %>">
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Edit Device Type
+        </h1>
+            <%- include('../partials/messages'); -%>
+            <form action="/device_types/edit/<%= device_type.id %>" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control" value="<%= device_type.name %>"/>
+                </div>
+                <div class="form-group">
+                    <label for="prefix">prefix:</label>
+                    <input type="text" name="prefix" class="form-control" value="<%= device_type.prefix %>"/>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Update
+                </button>
+            </form>
+            <div style="margin-bottom: 20px;">
+                <a href="/device_types/new" class="btn-primary">Add new Devive Type</a>
+                <a href="/device_types" class="btn-primary">Go back to Device Types</a>
+                <a href="/dashboard" class="btn-primary">Go back to dashboard</a>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="prefix">prefix:</label>
-        <input type="text" name="prefix" value="<%= device_type.prefix %>">
-    </div>
-    <input type="submit" value="Update Device Type">
-</form>
+</div>
