@@ -83,10 +83,13 @@ export const postEditDeviceType = async (req, res) => {
 };
 
 //delete device type
-export const deleteDeviceType = async (req, res) => {
+export const getDeleteDeviceType = async (req, res) => {
   const device_type = await Device_type.findByPk(req.params.id);
+  res.render("device_types/delete.ejs", { device_type: device_type });
+};
 
-  device_type.destroy();
+export const postDeleteDeviceType = async (req, res) => {
+  await Device_type.destroy({ where: { id: req.params.id } });
   req.flash("success_msg", "Device type deleted successfully");
   res.redirect("/device_types");
 };

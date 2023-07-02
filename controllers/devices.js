@@ -62,13 +62,13 @@ export const postNewDevice = (req, res) => {
 };
 
 //delete device
-export const deleteDevice = async (req, res) => {
-  try {
-    const device = await Device.findByPk(req.params.id);
-    await device.destroy();
-    req.flash("success_msg", "Device deleted successfully");
-    res.redirect("/devices");
-  } catch (err) {
-    console.log(err);
-  }
+export const getDeleteDevice = async (req, res) => {
+  const device = await Device.findByPk(req.params.id);
+  res.render("devices/delete.ejs", { device: device });
+};
+
+export const postDeleteDevice = async (req, res) => {
+  await Device.destroy({ where: { id: req.params.id } });
+  req.flash("success_msg", "Device deleted successfully");
+  res.redirect("/devices");
 };

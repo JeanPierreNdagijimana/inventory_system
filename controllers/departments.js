@@ -45,7 +45,7 @@ export const postNewDepartment = (req, res) => {
 export const getEditDepartment = async (req, res) => {
   const department = await Department.findByPk(req.params.id);
 
-  res.render("departments/edit.ejs", { department });
+  res.render("departments/edit.ejs", { department: department });
 };
 export const postEditDepartment = async (req, res) => {
   const { name } = req.body;
@@ -73,15 +73,14 @@ export const postEditDepartment = async (req, res) => {
 };
 
 //delete department
-export const deleteDepartment = async (req, res) => {
-  const department = await Department.findByPk(req.params.id);
 
-  Department.destroy({
-    where: { id: req.params.id },
-  })
-    .then((department) => {
-      req.flash("success_msg", "Department deleted successfully");
-      res.redirect("/departments");
-    })
-    .catch((err) => console.log(err));
+export const getDeleteDepartment = async (req, res) => {
+  const department = await Department.findByPk(req.params.id);
+  res.render("departments/delete.ejs", { department: department });
+};
+
+export const postDeleteDepartment = async (req, res) => {
+  await Department.destroy({ where: { id: req.params.id } });
+  req.flash("success_msg", "Department deleted successfully");
+  res.redirect("/departments");
 };

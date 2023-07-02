@@ -54,8 +54,8 @@ export const postNewAssignment = async (req, res) => {
     try {
       //validation passed
       const assignment = await Assignment.create({
-        devices_id,
-        employees_id,
+        devices_id: devices_id,
+        employees_id: employees_id,
       });
       // update status in device table
       await Device.update(
@@ -78,8 +78,18 @@ export const postNewAssignment = async (req, res) => {
 //get edit assignment page
 export const getEditAssignment = async (req, res) => {
   const assignment = await Assignment.findByPk(req.params.id);
+  const employees = await Employee.findAll({
+    attributes: ["id", "email"],
+  });
+  const devices = await Device.findAll({
+    attributes: ["id", "code"],
+  });
 
-  res.render("assignments/edit.ejs", { assignment });
+  res.render("assignments/edit.ejs", {
+    assignment: assignment,
+    employees: employees,
+    devices: devices,
+  });
 };
 
 //post edit assignment page
@@ -137,10 +147,13 @@ export const postEditAssignment = async (req, res) => {
 };
 
 //delete assignment
-export const deleteAssignment = async (req, res) => {
+export const getDeleteAssignment = async (req, res) => {
   const assignment = await Assignment.findByPk(req.params.id);
+  res.render("assignments/delete.ejs", { assignment: assignment });
+};
 
-  assignment.destroy();
+export const postDeleteAssignment = async (req, res) => {
+  await Assignment.destroy({ where: { id: req.params.id } });
   req.flash("success_msg", "Assignment deleted successfully");
   res.redirect("/assignments");
 };

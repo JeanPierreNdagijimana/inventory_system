@@ -7,7 +7,8 @@ import {
   postAddDeviceType,
   getEditDeviceType,
   postEditDeviceType,
-  deleteDeviceType,
+  getDeleteDeviceType,
+  postDeleteDeviceType,
 } from "../controllers/device_types.js";
 
 const DeviceTypeRouter = express.Router();
@@ -24,6 +25,7 @@ DeviceTypeRouter.get("/edit/:id", getEditDeviceType);
 DeviceTypeRouter.post("/edit/:id", postEditDeviceType);
 
 //delete device type
-DeviceTypeRouter.delete("/:id", deleteDeviceType);
+DeviceTypeRouter.get("/delete/:id", getDeleteDeviceType);
+DeviceTypeRouter.post("/delete/:id", postDeleteDeviceType);
 
 export default DeviceTypeRouter;

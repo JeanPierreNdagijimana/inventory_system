@@ -6,7 +6,8 @@ import {
   postNewDepartment,
   getEditDepartment,
   postEditDepartment,
-  deleteDepartment,
+  getDeleteDepartment,
+  postDeleteDepartment,
 } from "../controllers/departments.js";
 
 const DepartmentRouter = express.Router();
@@ -23,6 +24,7 @@ DepartmentRouter.get("/edit/:id", getEditDepartment);
 DepartmentRouter.post("/edit/:id", postEditDepartment);
 
 //delete department
-DepartmentRouter.delete("/:id", deleteDepartment);
+DepartmentRouter.get("/delete/:id", getDeleteDepartment);
+DepartmentRouter.post("/delete/:id", postDeleteDepartment);
 
 export default DepartmentRouter;

@@ -6,7 +6,8 @@ import {
   getDevices,
   getNewDevice,
   postNewDevice,
-  deleteDevice,
+  getDeleteDevice,
+  postDeleteDevice,
 } from "../controllers/devices.js";
 
 const DeviceRouter = express.Router();
@@ -21,6 +22,7 @@ DeviceRouter.get("/new", getNewDevice);
 DeviceRouter.post("/new", postNewDevice);
 
 //delete device
-DeviceRouter.delete("/:id", deleteDevice);
+DeviceRouter.get("/delete/:id", getDeleteDevice);
+DeviceRouter.post("/delete/:id", postDeleteDevice);
 
 export default DeviceRouter;

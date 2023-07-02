@@ -5,10 +5,27 @@
           <i class="fas fa-user-plus"></i> Edit Employee
         </h1>
             <%- include('../partials/messages'); -%>
-            <form action="/departments/edit/<%= department._id %>" method="POST">
-            <input type="hidden" name="_method" value="PUT">
-            
-            </form>
+            <form action="/departments/edit/<%= department.id %>" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                <label for="name">Department name</label>
+                <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                value="<%= typeof name != 'undefined' ? name : '' %>"
+                />
+            </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Save
+                </button>
+        </form>
+        <div style="margin-bottom: 20px;">
+            <a href="/departments/new" class="btn-primary">Add new Department</a>
+            <a href="/departments" class="btn-primary">Go back to Department</a>
+            <a href="/dashboard" class="btn-primary">Go back to dashboard</a>
+        </div>
         </div>
     </div>
 </div>

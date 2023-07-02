@@ -6,7 +6,8 @@ import {
   postNewAssignment,
   getEditAssignment,
   postEditAssignment,
-  deleteAssignment,
+  getDeleteAssignment,
+  postDeleteAssignment,
 } from "../controllers/assignments.js";
 
 const AssignmentRouter = express.Router();
@@ -23,6 +24,7 @@ AssignmentRouter.get("/edit/:id", getEditAssignment);
 AssignmentRouter.post("/edit/:id", postEditAssignment);
 
 //delete assignment
-AssignmentRouter.delete("/:id", deleteAssignment);
+AssignmentRouter.get("/:id", getDeleteAssignment);
+AssignmentRouter.post("/:id", postDeleteAssignment);
 
 export default AssignmentRouter;
