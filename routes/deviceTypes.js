@@ -15,30 +15,14 @@ import auth from "../config/auth.js";
 const DeviceTypeRouter = express.Router();
 
 //show all device types
-DeviceTypeRouter.get("/", auth.ensureAuthenticated, getDeviceTypes);
+DeviceTypeRouter.get("/", getDeviceTypes);
 
 //add device type
-DeviceTypeRouter.get("/new", auth.ensureAuthenticated, getAddDeviceType);
-DeviceTypeRouter.post("/new", auth.ensureAuthenticated, postAddDeviceType);
+DeviceTypeRouter.get("/new", auth.ensureAdmin, getAddDeviceType);
+DeviceTypeRouter.post("/new", auth.ensureAdmin, postAddDeviceType);
 
 //edit device type
-DeviceTypeRouter.get("/edit/:id", auth.ensureAuthenticated, getEditDeviceType);
-DeviceTypeRouter.post(
-  "/edit/:id",
-  auth.ensureAuthenticated,
-  postEditDeviceType
-);
-
-//delete device type
-DeviceTypeRouter.get(
-  "/delete/:id",
-  auth.ensureAuthenticated,
-  getDeleteDeviceType
-);
-DeviceTypeRouter.post(
-  "/delete/:id",
-  auth.ensureAuthenticated,
-  postDeleteDeviceType
-);
+DeviceTypeRouter.get("/edit/:id", auth.ensureAdmin, getEditDeviceType);
+DeviceTypeRouter.post("/edit/:id", auth.ensureAdmin, postEditDeviceType);
 
 export default DeviceTypeRouter;

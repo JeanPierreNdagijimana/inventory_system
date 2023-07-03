@@ -17,7 +17,6 @@ export const getEmployeeList = async (req, res) => {
 //get new employee
 export const getEmployee = async (req, res) => {
   const department_names = await Department.findAll();
-  console.log(department_names);
 
   res.render("employees/new.ejs", { department_names });
 };

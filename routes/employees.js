@@ -12,23 +12,15 @@ import auth from "../config/auth.js";
 
 const EmployeeRouter = express.Router();
 
-//add employee
-EmployeeRouter.get("/new", auth.ensureAuthenticated, getEmployee);
-EmployeeRouter.post("/new", auth.ensureAuthenticated, postEmployee);
-
 //get employee list
-EmployeeRouter.get("/", auth.ensureAuthenticated, getEmployeeList);
+EmployeeRouter.get("/", getEmployeeList);
+
+//add employee
+EmployeeRouter.get("/new", auth.ensureAdmin, getEmployee);
+EmployeeRouter.post("/new", auth.ensureAdmin, postEmployee);
 
 //edit employee
-EmployeeRouter.get("/edit/:id", auth.ensureAuthenticated, getEmployeeEdit);
-EmployeeRouter.post("/edit/:id", auth.ensureAuthenticated, postEmployeeEdit);
-
-//delete employee
-EmployeeRouter.get("/delete/:id", auth.ensureAuthenticated, getEmployeeDelete);
-EmployeeRouter.post(
-  "/delete/:id",
-  auth.ensureAuthenticated,
-  postEmployeeDelete
-);
+EmployeeRouter.get("/edit/:id", auth.ensureAdmin, getEmployeeEdit);
+EmployeeRouter.post("/edit/:id", auth.ensureAdmin, postEmployeeEdit);
 
 export default EmployeeRouter;

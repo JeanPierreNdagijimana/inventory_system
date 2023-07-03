@@ -36,9 +36,6 @@ UserRouter.post("/register", postRegister);
 UserRouter.get("/edit/:id", auth.ensureAuthenticated, getEditUser);
 UserRouter.post("/edit/:id", auth.ensureAuthenticated, postEditUser);
 
-//delete user
-UserRouter.delete("/:id", auth.ensureAuthenticated, getDeleteUser);
-
 //Logout handle
 UserRouter.get("/logout", auth.ensureAuthenticated, getLogout);
 

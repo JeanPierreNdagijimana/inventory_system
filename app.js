@@ -4,10 +4,10 @@ import path from "path";
 import session from "express-session";
 import passport from "passport";
 import flash from "connect-flash";
-import dotenv from "dotenv";
-dotenv.config();
 
 import { db } from "./config/db.js";
+import { port } from "./config/index.js";
+import auth from "./config/auth.js";
 
 //models
 import Role from "./models/Role.js";
@@ -27,9 +27,6 @@ import AssignmentRouter from "./routes/assignments.js";
 import UserRouter from "./routes/users.js";
 import DepartmentRouter from "./routes/departments.js";
 
-//passport config
-import "./config/passport.js";
-
 const __dirname = path.resolve();
 
 //test db
@@ -37,7 +34,7 @@ db.authenticate()
   .then(async () => await db.sync())
   .catch((err) => console.log("Error: " + err));
 
-//define associations
+// ASSOCIATIONS
 
 // Connect the roles to the users
 Role.hasMany(User, {
@@ -159,24 +156,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const isAuth = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.flash("error_msg", "Please log in to view that resource");
-  res.redirect("/users/login");
-};
-
 //routes
 app.use("/", router);
 app.use("/users", UserRouter);
-app.use("/employees", isAuth, EmployeeRouter);
-app.use("/departments", isAuth, DepartmentRouter);
-app.use("/devices", isAuth, DeviceRouter);
-app.use("/device_types", isAuth, DeviceTypeRouter);
-app.use("/assignments", isAuth, AssignmentRouter);
+app.use("/employees", auth.ensureAuthenticated, EmployeeRouter);
+app.use("/departments", auth.ensureAuthenticated, DepartmentRouter);
+app.use("/devices", auth.ensureAuthenticated, DeviceRouter);
+app.use("/device_types", auth.ensureAuthenticated, DeviceTypeRouter);
+app.use("/assignments", auth.ensureAuthenticated, AssignmentRouter);
 
 //set a port
-const PORT = process.env.PORT || 5000;
+const PORT = port || 5000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
