@@ -159,14 +159,22 @@ app.use((req, res, next) => {
   next();
 });
 
+const isAuth = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash("error_msg", "Please log in to view that resource");
+  res.redirect("/users/login");
+};
+
 //routes
 app.use("/", router);
 app.use("/users", UserRouter);
-app.use("/employees", EmployeeRouter);
-app.use("/departments", DepartmentRouter);
-app.use("/devices", DeviceRouter);
-app.use("/device_types", DeviceTypeRouter);
-app.use("/assignments", AssignmentRouter);
+app.use("/employees", isAuth, EmployeeRouter);
+app.use("/departments", isAuth, DepartmentRouter);
+app.use("/devices", isAuth, DeviceRouter);
+app.use("/device_types", isAuth, DeviceTypeRouter);
+app.use("/assignments", isAuth, AssignmentRouter);
 
 //set a port
 const PORT = process.env.PORT || 5000;
