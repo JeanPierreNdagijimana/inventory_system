@@ -3,9 +3,19 @@ import passportStrategy from "../config/passport.js";
 passportStrategy(passport);
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
-import e from "connect-flash";
+import Department from "../models/Department.js";
+import Employee from "../models/Employee.js";
+import Device from "../models/Device.js";
+import Device_type from "../models/Device_type.js";
 
-export const getLogin = async (req, res) => res.render("users/login.ejs");
+export const getLogin = async (req, res) => {
+  // Check if the user is already logged in
+  if (req.user) {
+    return res.redirect("/dashboard");
+  }
+
+  res.render("users/login.ejs");
+};
 
 export const postLogin = (req, res, next) => {
   passport.authenticate("local", {
@@ -15,7 +25,14 @@ export const postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-export const getRegister = async (req, res) => res.render("users/register.ejs");
+export const getRegister = async (req, res) => {
+  // Check if the user is already logged in
+  if (req.user) {
+    return res.redirect("/dashboard");
+  }
+
+  res.render("users/register.ejs");
+};
 
 export const postRegister = async (req, res) => {
   const { first_name, last_name, username, email, password, password2 } =
@@ -100,14 +117,60 @@ export const postRegister = async (req, res) => {
   }
 };
 
+export const getDashboard = async (req, res) => {
+  // Total Users
+  const users = await User.count();
+
+  // Total Departments
+  const departments = await Department.count();
+
+  // Total Employees
+  const employees = await Employee.count();
+
+  // Device Types
+  const device_types = await Device_type.count();
+
+  // Total Devices
+  const devices = await Device.count();
+
+  // Total assigned devices
+  const assigned_devices = await Device.count({
+    where: { status: 1 },
+  });
+
+  // Total unassigned devices
+  const unassigned_devices = await Device.count({
+    where: { status: 0 },
+  });
+
+  // Total devices in repair
+  const decommissioned_devices = await Device.count({
+    where: { status: 2 },
+  });
+
+  const total = {
+    users,
+    departments,
+    employees,
+    device_types,
+    devices,
+    assigned_devices,
+    unassigned_devices,
+    decommissioned_devices,
+  };
+
+  res.render("users/dashboard.ejs", { total });
+};
+
 //show all users
 export const getUsers = async (req, res) => {
-  User.findAll()
-    .then((users) => {
-      res.render("users/index.ejs", { users: users });
-    })
-    .catch((err) => console.log(err));
+  const users = await User.findAll({
+    include: "role",
+  });
+
+  res.render("users/index.ejs", { users });
 };
+
 //edit user
 export const getEditUser = async (req, res) => {
   User.findOne({ where: { id: req.params.id } })
@@ -116,6 +179,7 @@ export const getEditUser = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+
 export const postEditUser = async (req, res) => {
   const { first_name, last_name, username, email } = req.body;
   User.update(

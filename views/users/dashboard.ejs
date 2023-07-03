@@ -1,39 +1,107 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= username %> , your email is <%= email %></p>
+<div>
+  <h1 class="mt-4">Dashboard</h1>
+  <p class="lead mb-3">Welcome, <strong>
+      <%= user_session.first_name %>
+    </strong>
+  </p>
 
-<div style="margin-bottom: 10px;">
-    <a href="users/logout" class="btn btn-secondary">Logout</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/users" class="btn btn-primary">View Users</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/departments" class="btn btn-primary">View Departments</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/departments/new" class="btn btn-success">Add New Department</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/employees" class="btn btn-primary">View Employees</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/employees/new" class="btn btn-success">Add New Employee</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/device_types" class="btn btn-primary">View Device Types</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/device_types/new" class="btn btn-success">Add New Device Type</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/devices" class="btn btn-primary">View Devices</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/devices/new" class="btn btn-success">Add New Device</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/assignments" class="btn btn-primary">View Assignments</a>
-</div>
-<div style="margin-bottom: 10px;">
-    <a href="/assignments/new" class="btn btn-success">Add New Assignment</a>
+  <div class="row">
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Users</h5>
+          <p class="h1">
+            <%= total.users %>
+          </p>
+          <a href="/users" class="card-link">View Users</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Departments</h5>
+          <p class="h1">
+            <%= total.departments %>
+          </p>
+          <a href="/departments" class="card-link">View Departments</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Employees</h5>
+          <p class="h1">
+            <%= total.employees %>
+          </p>
+          <a href="/employees" class="card-link">View Employees</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Device Types</h5>
+          <p class="h1">
+            <%= total.device_types %>
+          </p>
+          <a href="/device_types" class="card-link">View Device Types</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Total Devices</h5>
+          <p class="h1">
+            <%= total.devices %>
+          </p>
+          <a href="/devices" class="card-link">View Devices</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Assigned Devices</h5>
+          <p class="h1">
+            <%= total.assigned_devices %>
+          </p>
+          <a href="/devices" class="card-link">View Devices</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Unassigned Devices</h5>
+          <p class="h1">
+            <%= total.unassigned_devices %>
+          </p>
+          <a href="/devices" class="card-link">View Devices</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mt-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Decommissioned Devices</h5>
+          <p class="h1">
+            <%= total.decommissioned_devices %>
+          </p>
+          <a href="/devices" class="card-link">View Devices</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

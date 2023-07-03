@@ -13,8 +13,12 @@ import {
   postEditUser,
   getDeleteUser,
 } from "../controllers/users.js";
+import auth from "../config/auth.js";
 
 const UserRouter = express.Router();
+
+//Get all users
+UserRouter.get("/", auth.ensureAuthenticated, getUsers);
 
 //Login page - now using the login controller
 UserRouter.get("/login", getLogin);
@@ -29,13 +33,13 @@ UserRouter.get("/register", getRegister);
 UserRouter.post("/register", postRegister);
 
 //edit user
-UserRouter.get("/edit/:id", getEditUser);
-UserRouter.post("/edit/:id", postEditUser);
+UserRouter.get("/edit/:id", auth.ensureAuthenticated, getEditUser);
+UserRouter.post("/edit/:id", auth.ensureAuthenticated, postEditUser);
 
 //delete user
-UserRouter.delete("/:id", getDeleteUser);
+UserRouter.delete("/:id", auth.ensureAuthenticated, getDeleteUser);
 
 //Logout handle
-UserRouter.get("/logout", getLogout);
+UserRouter.get("/logout", auth.ensureAuthenticated, getLogout);
 
 export default UserRouter;

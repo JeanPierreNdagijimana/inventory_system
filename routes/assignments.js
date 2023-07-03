@@ -4,27 +4,24 @@ import {
   getAssignments,
   getNewAssignment,
   postNewAssignment,
-  getEditAssignment,
-  postEditAssignment,
-  getDeleteAssignment,
-  postDeleteAssignment,
+  postUnassignAssignment,
 } from "../controllers/assignments.js";
+import auth from "../config/auth.js";
 
 const AssignmentRouter = express.Router();
 
 //show all assignments
-AssignmentRouter.get("/", getAssignments);
+AssignmentRouter.get("/", auth.ensureAuthenticated, getAssignments);
 
 //new assignment page
-AssignmentRouter.get("/new", getNewAssignment);
-AssignmentRouter.post("/new", postNewAssignment);
+AssignmentRouter.get("/new", auth.ensureAuthenticated, getNewAssignment);
+AssignmentRouter.post("/new", auth.ensureAuthenticated, postNewAssignment);
 
-//edit assignment page
-AssignmentRouter.get("/edit/:id", getEditAssignment);
-AssignmentRouter.post("/edit/:id", postEditAssignment);
-
-//delete assignment
-AssignmentRouter.get("/:id", getDeleteAssignment);
-AssignmentRouter.post("/:id", postDeleteAssignment);
+// Unassign
+AssignmentRouter.post(
+  "/unassign/:id",
+  auth.ensureAuthenticated,
+  postUnassignAssignment
+);
 
 export default AssignmentRouter;

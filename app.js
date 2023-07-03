@@ -38,13 +38,34 @@ db.authenticate()
   .catch((err) => console.log("Error: " + err));
 
 //define associations
+
+// Connect the roles to the users
+Role.hasMany(User, {
+  foreignKey: {
+    name: "roles_id",
+    defaultValue: 1,
+  },
+  as: "users",
+});
+
+// Connect the users to the roles
 User.belongsTo(Role, {
   foreignKey: {
     name: "roles_id",
+    defaultValue: 1,
   },
   as: "role",
 });
 
+// Connect the departments to the employees
+Department.hasMany(Employee, {
+  foreignKey: {
+    name: "departments_id",
+  },
+  as: "employees",
+});
+
+// Connect the employees to the departments
 Employee.belongsTo(Department, {
   foreignKey: {
     name: "departments_id",
@@ -52,6 +73,15 @@ Employee.belongsTo(Department, {
   as: "department",
 });
 
+// Connect the devuce types to the devices
+Device_type.hasMany(Device, {
+  foreignKey: {
+    name: "device_types_id",
+  },
+  as: "devices",
+});
+
+// Connect the devices to the device types
 Device.belongsTo(Device_type, {
   foreignKey: {
     name: "device_types_id",
@@ -59,24 +89,42 @@ Device.belongsTo(Device_type, {
   as: "device_type",
 });
 
-Employee.belongsToMany(Device, {
-  through: Assignment,
-  foreignKey: "employees_id",
-  otherKey: "devices_id",
-  as: "devices",
+// Connect the devices to the assignments
+Device.hasMany(Assignment, {
+  foreignKey: {
+    name: "devices_id",
+  },
+  as: "assignments",
 });
 
-Device.belongsToMany(Employee, {
-  through: Assignment,
-  foreignKey: "devices_id",
-  otherKey: "employees_id",
-  as: "employees",
+// Connect the assignments to the devices
+Assignment.belongsTo(Device, {
+  foreignKey: {
+    name: "devices_id",
+  },
+  as: "device",
+});
+
+// Connect the employees to the assignments
+Employee.hasMany(Assignment, {
+  foreignKey: {
+    name: "employees_id",
+  },
+  as: "assignments",
+});
+
+// Connect the assignments to the employees
+Assignment.belongsTo(Employee, {
+  foreignKey: {
+    name: "employees_id",
+  },
+  as: "employee",
 });
 
 const app = express();
 
 //set static folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 //EJS middleware
 app.use(expressLayouts);
@@ -106,6 +154,8 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg"); //global variable
   res.locals.error_msg = req.flash("error_msg"); //global variable
   res.locals.error = req.flash("error"); //global variable
+  res.locals.user_session = req.user || null; //global variable
+  res.locals.url = req.url;
   next();
 });
 
@@ -117,33 +167,8 @@ app.use("/departments", DepartmentRouter);
 app.use("/devices", DeviceRouter);
 app.use("/device_types", DeviceTypeRouter);
 app.use("/assignments", AssignmentRouter);
-//loclahost:5000
-//loclahost:5000/dashoard
-//loclahost:5000/users/login
-//loclahost:5000/users/register
-//loclahost:5000/users/logout
-//loclahost:5000/users/edit/:id
-//loclahost:5000/users/delete/:id
-//loclahost:5000/employees/
-//loclahost:5000/employees/new
-//loclahost:5000/employees/edit/:id
-//loclahost:5000/employees/:id
-//loclahost:5000/departments
-//loclahost:5000/departments/new
-//loclahost:5000/departments/edit/:id
-//loclahost:5000/departments/:id
-//loclahost:5000/devices
-//loclahost:5000/devices/new
-//loclahost:5000/devices/edit/:id
-//loclahost:5000/device_types
-//loclahost:5000/device_types/new
-//loclahost:5000/device_types/edit/:id
-//loclahost:5000/device_types/:id
-//loclahost:5000/assignments
-//loclahost:5000/assignments/new
-//loclahost:5000/assignments/edit/:id
-//loclahost:5000/assignments/:id
 
 //set a port
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

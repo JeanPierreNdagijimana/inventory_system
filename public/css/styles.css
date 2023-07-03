@@ -1,0 +1,11 @@
+form label {
+  margin: 15px 0 5px 0;
+}
+
+form button.btn.btn-primary.btn-block {
+  margin-top: 20px;
+}
+
+div.dataTables_wrapper {
+  margin: 40px 0;
+}
