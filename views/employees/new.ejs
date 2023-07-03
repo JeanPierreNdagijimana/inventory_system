@@ -1,67 +1,45 @@
 <div class="row mt-5">
-    <div class="col-md-6 m-auto">
-      <div class="card card-body">
-        <h1 class="text-center mb-3">
-          <i class="fas fa-user-plus"></i> Add new Employee
-        </h1>
-        <%- include ('../partials/messages'); -%>
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Add new Employee
+      </h1>
+      <%- include ('../partials/messages'); -%>
         <form action="/employees/new" method="POST">
           <div class="form-group">
             <label for="first_name">First Name</label>
-            <input
-              type="text"
-              id="first_name"
-              name="first_name"
-              class="form-control"
-              placeholder="Enter First Name"
-              value="<%= typeof first_name != 'undefined' ? first_name : '' %>"
-            />
+            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Enter First Name"
+              value="<%= typeof first_name != 'undefined' ? first_name : '' %>" />
           </div>
           <div class="form-group">
             <label for="last_name">Last Name</label>
-            <input
-              type="text"
-              id="last_name"
-              name="last_name"
-              class="form-control"
-              placeholder="Enter Name"
-              value="<%= typeof last_name != 'undefined' ? last_name : '' %>"
-            />
+            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter Name"
+              value="<%= typeof last_name != 'undefined' ? last_name : '' %>" />
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              placeholder="Enter Email"
-              value="<%= typeof email != 'undefined' ? email : '' %>"
-            />
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>" />
           </div>
           <div class="form-group">
             <label for="country">Country</label>
-            <input
-              type="text"
-              id="country"
-              name="country"
-              class="form-control"
-              placeholder="Enter country"
-              value="<%= typeof country != 'undefined' ? country : '' %>"
-            />
+            <input type="text" id="country" name="country" class="form-control" placeholder="Enter country"
+              value="<%= typeof country != 'undefined' ? country : '' %>" />
           </div>
           <div class="form-group">
-            <label for="department_names_id">Department name</label>
-            <select class= "form-control" name="department_names_id" id="department_names_id">
-              <% department_names.forEach(function(dpmt) { %>
-              <option value="<%=dpmt.id %>"><%=dpmt.name %></option>
-              <% }); %>
-            </select>	
+            <label for="department_names_id">Department</label>
+            <select class="form-control" name="department_names_id" id="department_names_id">
+              <% department_names.forEach(function(department) { %>
+                <option value="<%=department.id %>">
+                  <%=department.name %>
+                </option>
+                <% }); %>
+            </select>
           </div>
           <button type="submit" class="btn btn-primary btn-block">
             Add Employee
           </button>
         </form>
-      </div>
     </div>
   </div>
+</div>

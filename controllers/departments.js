@@ -10,7 +10,7 @@ export const getDepartments = async (req, res) => {
 };
 
 //new department page
-export const getNewDepartment = (req, res) => {
+export const getNewDepartment = async (req, res) => {
   res.render("departments/new.ejs");
 };
 
@@ -45,7 +45,7 @@ export const postNewDepartment = (req, res) => {
 export const getEditDepartment = async (req, res) => {
   const department = await Department.findByPk(req.params.id);
 
-  res.render("departments/edit.ejs", { department: department });
+  res.render("departments/edit.ejs", { department });
 };
 export const postEditDepartment = async (req, res) => {
   const { name } = req.body;
@@ -73,7 +73,6 @@ export const postEditDepartment = async (req, res) => {
 };
 
 //delete department
-
 export const getDeleteDepartment = async (req, res) => {
   const department = await Department.findByPk(req.params.id);
   res.render("departments/delete.ejs", { department: department });

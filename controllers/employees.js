@@ -61,49 +61,50 @@ export const postEmployee = (req, res) => {
 
 export const getEmployeeEdit = async (req, res) => {
   const employee = await Employee.findByPk(req.params.id);
-  const department_names = await Department.findAll();
+  const departments = await Department.findAll();
   res.render("employees/edit.ejs", {
-    employee: employee,
-    department_names: department_names,
+    employee,
+    departments,
   });
 };
 
 export const postEmployeeEdit = async (req, res) => {
-  const { first_name, last_name, email, country, department_names_id } =
-    req.body;
+  const { first_name, last_name, email, country, departments_id } = req.body;
   let errors = [];
 
   //check required fields
-  if (!first_name || !last_name || !email || !country || !department_names_id) {
-    errors.push({ msg: "Please fill in all fields" });
+  if (!first_name || !last_name || !email || !country || !departments_id) {
+    errors.push({ msg: "All fields are required" });
   }
   //check if there are errors
   if (errors.length > 0) {
+    const departments = await Department.findAll();
+    const employee = await Employee.findByPk(req.params.id);
     res.render("employees/edit.ejs", {
       errors,
-      first_name,
-      last_name,
-      email,
-      country,
-      department_names_id,
+      departments,
+      employee,
     });
   } else {
     //validation passed
-    Employee.update(
-      {
-        first_name,
-        last_name,
-        email,
-        country,
-        department_names_id,
-      },
-      { where: { id: req.params.id } }
-    )
-      .then((employee) => {
-        req.flash("success_msg", "Employee updated successfully");
-        res.redirect("/employees");
-      })
-      .catch((err) => console.log(err));
+    try {
+      await Employee.update(
+        {
+          first_name,
+          last_name,
+          email,
+          country,
+          departments_id,
+        },
+        { where: { id: req.params.id } }
+      );
+
+      req.flash("success_msg", "Employee updated successfully");
+      res.redirect("/employees");
+    } catch (err) {
+      req.flash("error_msg", "Error updating employee");
+      res.redirect("/employees");
+    }
   }
 };
 

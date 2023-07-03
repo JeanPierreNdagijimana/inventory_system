@@ -1,39 +1,47 @@
-<%- include ('../partials/messages'); -%>
-<h1>Views assignment</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Employee email</th>
-            <th>Device code</th>
-            <th>Device model</th>
-            <th>Device serial number</th>
-            <th>Status</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% assignments.forEach(function(assignment){ %>
-        <tr>
-            <td><%= assignment.employees.email %></td>
-            <td><%= assignment.devices.code %></td>
-            <td><%= assignment.devices.model %></td>
-            <td><%= assignment.devices.serial_number %></td>
-            <td><%= assignment.status %></td>
-            <td><%= assignment.createdAt %></td>
-            <td><%= assignment.updatedAt %></td>
-            <td><a href="/assignments/edit/<%= assignment.id %>" class="btn btn-secondary">Edit</a></td>
-            <td>
-                <form action="/assignments/delete/<%= assignment.id %>" method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-        <% }); %>
-    </tbody>
-</table>
 <div>
-    <a href="/assignments/new" class="btn btn-primary">Add New Assignment</a>
-    <a href="/dashboard" class="btn btn-primary">Go back to dashboard</a>
+  <h1>Device Assignments</h1>
+  <%- include ('../partials/messages'); -%>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Employee email</th>
+          <th>Device code</th>
+          <th>Status</th>
+          <th>Created at</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% assignments.forEach(function(assignment){ %>
+          <tr>
+            <td>
+              <%= assignment.id %>
+            </td>
+            <td>
+              <%= assignment.employee.email %>
+            </td>
+            <td>
+              <%= assignment.device.code %>
+            </td>
+            <td>
+              <%= assignment.status %>
+            </td>
+            <td>
+              <%= assignment.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <form action="/assignments/unassign/<%= assignment.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-sm btn-danger" type="submit" <%=assignment.status==1 ? "" : "disabled" %>
+                  >Unassign</button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+    <div>
+      <a href="/assignments/new" class="btn btn-primary">Add New Assignment</a>
+    </div>
 </div>
