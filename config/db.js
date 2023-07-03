@@ -1,6 +1,12 @@
 import { Sequelize } from "sequelize";
+import { database } from "./index.js";
 
-export const db = new Sequelize("inventoryDB", "root", "Learning@Time1", {
-  host: "localhost",
-  dialect: "mysql",
-});
+export const db = new Sequelize(
+  database.name,
+  database.username,
+  database.password,
+  {
+    host: database.host,
+    dialect: database.dialect,
+  }
+);

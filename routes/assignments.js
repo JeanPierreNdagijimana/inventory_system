@@ -11,16 +11,16 @@ import auth from "../config/auth.js";
 const AssignmentRouter = express.Router();
 
 //show all assignments
-AssignmentRouter.get("/", auth.ensureAuthenticated, getAssignments);
+AssignmentRouter.get("/", getAssignments);
 
 //new assignment page
-AssignmentRouter.get("/new", auth.ensureAuthenticated, getNewAssignment);
-AssignmentRouter.post("/new", auth.ensureAuthenticated, postNewAssignment);
+AssignmentRouter.get("/new", auth.ensureAdmin, getNewAssignment);
+AssignmentRouter.post("/new", auth.ensureAdmin, postNewAssignment);
 
 // Unassign
 AssignmentRouter.post(
   "/unassign/:id",
-  auth.ensureAuthenticated,
+  auth.ensureAdmin,
   postUnassignAssignment
 );
 

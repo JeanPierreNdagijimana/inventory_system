@@ -4,104 +4,104 @@
       <%= user_session.first_name %>
     </strong>
   </p>
-
-  <div class="row">
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Users</h5>
-          <p class="h1">
-            <%= total.users %>
-          </p>
-          <a href="/users" class="card-link">View Users</a>
+  <%- include ("../partials/messages") -%>
+    <div class="row">
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Users</h5>
+            <p class="h1">
+              <%= total.users %>
+            </p>
+            <a href="/users" class="card-link">View Users</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Departments</h5>
-          <p class="h1">
-            <%= total.departments %>
-          </p>
-          <a href="/departments" class="card-link">View Departments</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Departments</h5>
+            <p class="h1">
+              <%= total.departments %>
+            </p>
+            <a href="/departments" class="card-link">View Departments</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Employees</h5>
-          <p class="h1">
-            <%= total.employees %>
-          </p>
-          <a href="/employees" class="card-link">View Employees</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Employees</h5>
+            <p class="h1">
+              <%= total.employees %>
+            </p>
+            <a href="/employees" class="card-link">View Employees</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Device Types</h5>
-          <p class="h1">
-            <%= total.device_types %>
-          </p>
-          <a href="/device_types" class="card-link">View Device Types</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Device Types</h5>
+            <p class="h1">
+              <%= total.device_types %>
+            </p>
+            <a href="/device_types" class="card-link">View Device Types</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Total Devices</h5>
-          <p class="h1">
-            <%= total.devices %>
-          </p>
-          <a href="/devices" class="card-link">View Devices</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Total Devices</h5>
+            <p class="h1">
+              <%= total.devices %>
+            </p>
+            <a href="/devices" class="card-link">View Devices</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Assigned Devices</h5>
-          <p class="h1">
-            <%= total.assigned_devices %>
-          </p>
-          <a href="/devices" class="card-link">View Devices</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Assigned Devices</h5>
+            <p class="h1">
+              <%= total.assigned_devices %>
+            </p>
+            <a href="/devices" class="card-link">View Devices</a>
+          </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Unassigned Devices</h5>
-          <p class="h1">
-            <%= total.unassigned_devices %>
-          </p>
-          <a href="/devices" class="card-link">View Devices</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Unassigned Devices</h5>
+            <p class="h1">
+              <%= total.unassigned_devices %>
+            </p>
+            <a href="/devices" class="card-link">View Devices</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3 mt-4 d-flex">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Decommissioned Devices</h5>
-          <p class="h1">
-            <%= total.decommissioned_devices %>
-          </p>
-          <a href="/devices" class="card-link">View Devices</a>
+      <div class="col-md-3 mt-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Decommissioned Devices</h5>
+            <p class="h1">
+              <%= total.decommissioned_devices %>
+            </p>
+            <a href="/devices" class="card-link">View Devices</a>
+          </div>
         </div>
       </div>
-    </div>
 
-  </div>
+    </div>
 </div>

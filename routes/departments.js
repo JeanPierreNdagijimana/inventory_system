@@ -14,30 +14,14 @@ import auth from "../config/auth.js";
 const DepartmentRouter = express.Router();
 
 //show all departments
-DepartmentRouter.get("/", auth.ensureAuthenticated, getDepartments);
+DepartmentRouter.get("/", getDepartments);
 
 //new department page
-DepartmentRouter.get("/new", auth.ensureAuthenticated, getNewDepartment);
-DepartmentRouter.post("/new", auth.ensureAuthenticated, postNewDepartment);
+DepartmentRouter.get("/new", auth.ensureAdmin, getNewDepartment);
+DepartmentRouter.post("/new", auth.ensureAdmin, postNewDepartment);
 
 //edit department page
-DepartmentRouter.get("/edit/:id", auth.ensureAuthenticated, getEditDepartment);
-DepartmentRouter.post(
-  "/edit/:id",
-  auth.ensureAuthenticated,
-  postEditDepartment
-);
-
-//delete department
-DepartmentRouter.get(
-  "/delete/:id",
-  auth.ensureAuthenticated,
-  getDeleteDepartment
-);
-DepartmentRouter.post(
-  "/delete/:id",
-  auth.ensureAuthenticated,
-  postDeleteDepartment
-);
+DepartmentRouter.get("/edit/:id", auth.ensureAdmin, getEditDepartment);
+DepartmentRouter.post("/edit/:id", auth.ensureAdmin, postEditDepartment);
 
 export default DepartmentRouter;

@@ -1,5 +1,4 @@
 import LocalStrategy from "passport-local";
-import { Sequelize } from "sequelize";
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
@@ -9,7 +8,9 @@ export default function (passport) {
       { usernameField: "username" },
       (username, password, done) => {
         //Match user
-        User.findOne({ where: { username: username } })
+        User.findOne({
+          where: { username: username },
+        })
           .then((user) => {
             if (!user) {
               return done(null, false, {
@@ -34,7 +35,10 @@ export default function (passport) {
     done(null, user.username);
   });
   passport.deserializeUser(function (username, done) {
-    User.findOne({ where: { username: username } })
+    User.findOne({
+      include: "role",
+      where: { username: username },
+    })
       .then((user) => {
         done(null, user);
       })

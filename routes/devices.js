@@ -14,25 +14,25 @@ import auth from "../config/auth.js";
 const DeviceRouter = express.Router();
 
 //show all devices
-DeviceRouter.get("/", auth.ensureAuthenticated, getDevices);
+DeviceRouter.get("/", getDevices);
 
 //new device page
-DeviceRouter.get("/new", auth.ensureAuthenticated, getNewDevice);
+DeviceRouter.get("/new", auth.ensureAdmin, getNewDevice);
 
 //add device
-DeviceRouter.post("/new", auth.ensureAuthenticated, postNewDevice);
+DeviceRouter.post("/new", auth.ensureAdmin, postNewDevice);
 
 // Decommission device
 DeviceRouter.post(
   "/decommission/:id",
-  auth.ensureAuthenticated,
+  auth.ensureAdmin,
   postDecommissionDevice
 );
 
 // Recommission device
 DeviceRouter.post(
   "/recommission/:id",
-  auth.ensureAuthenticated,
+  auth.ensureAdmin,
   postRecommissionDevice
 );
 
