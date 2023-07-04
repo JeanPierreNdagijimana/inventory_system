@@ -1,0 +1,41 @@
+<div>
+  <h1>Device Types</h1>
+  <%- include('../partials/messages'); -%>
+    <table class="table table-striped table-bordered">
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Prefix</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% device_types.forEach((device_type)=> { %>
+          <tr>
+            <td>
+              <%= device_type.id %>
+            </td>
+            <td>
+              <%= device_type.name %>
+            </td>
+            <td>
+              <%= device_type.prefix %>
+            </td>
+            <td>
+              <%= device_type.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <a href="/device_types/edit/<%= device_type.id %>" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+
+    <div>
+      <a href="/device_types/new" class="btn btn-primary">Add New Device type</a>
+    </div>

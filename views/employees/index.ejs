@@ -1,0 +1,51 @@
+<div>
+  <h1>Employees</h1>
+  <%- include('../partials/messages'); -%>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th> Email</th>
+          <th>country</th>
+          <th>Department</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% employees.forEach(function(employee) { %>
+          <tr>
+            <td>
+              <%= employee.id %>
+            </td>
+            <td>
+              <%= employee.first_name %>
+            </td>
+            <td>
+              <%= employee.last_name %>
+            </td>
+            <td>
+              <%= employee.email %>
+            </td>
+            <td>
+              <%= employee.country %>
+            </td>
+            <td>
+              <%= employee.department.name %>
+            </td>
+            <td>
+              <%= employee.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <a href="/employees/edit/<%= employee.id %>" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+    <div>
+      <a href="/employees/new" class="btn btn-primary">Add new Employee</a>
+    </div>
+</div>

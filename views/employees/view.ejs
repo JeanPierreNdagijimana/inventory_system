@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<h1>Employee</h1>
+<div>
+    <h3>First Name: <%= employee.firstName %></h3>
+    <h3>Last Name: <%= employee.lastName %></h3>
+    <h3>Email: <%= employee.email %></h3>
+    <h3>Phone: <%= employee.country %></h3>
+    <h3>Department: <%= department_names.name %></h3>
+</div>
+<div>
+    <a href="/employees/<%= employee.id %>/edit">Edit</a>
+    <form action="/employees/<%= employee.id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</div>
+<div>
+    <a href="/employees/new" class="btn-primary">Add new Employee</a>
+    <a href="/dashboard" class="btn-primary">Go back to dashboard</a>
+</div>

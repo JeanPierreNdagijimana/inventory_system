@@ -1,0 +1,26 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Add New Department
+        </h1>
+        <%- include ('../partials/messages'); -%>
+        <form action="/departments/new" method="POST">
+          <div class="form-group">
+            <label for="name">Department name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Enter department name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Add Department
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>

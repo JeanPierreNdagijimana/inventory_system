@@ -1,0 +1,34 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Edit Assignment
+      </h1>
+      <% include ("../partials/messages") %>
+        <form action="/assignments/edit/<%= assignment.id %>" method="POST">
+          <input type="hidden" name="_method" value="PUT">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>" />
+          </div>
+          <div class="form-group">
+            <label for="name">Device name</label>
+            <input type="text" id="code" name="code" class="form-control" placeholder="Enter device code"
+              value="<%= typeof code != 'undefined' ? code : '' %>" />
+          </div>
+          <div class="form-group">
+            <label for="status">status</label>
+            <input type="int" id="status" name="status" class="form-control" placeholder="1 for active, 0 for inactive"
+              value="<%= typeof status != 'undefined' ? status : '' %>" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </form>
+        <div>
+          <a href="/assignments/new" class="btn btn-primary">Add New Assignment</a>
+          <a href="/assignments" class="btn btn-primary">Go back to Assignments</a>
+          <a href="/dashboard" class="btn btn-primary">Go back to dashboard</a>
+        </div>
+    </div>
+  </div>
+</div>

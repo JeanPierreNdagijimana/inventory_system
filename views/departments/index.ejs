@@ -1,0 +1,37 @@
+<div>
+  <h1>Departments</h1>
+  <%- include('../partials/messages'); -%>
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% departments.forEach((department)=> { %>
+          <tr>
+            <td>
+              <%= department.id %>
+            </td>
+            <td>
+              <%= department.name %>
+            </td>
+            <td>
+              <%= department.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <a href="/departments/edit/<%= department.id %>" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+
+    <div>
+      <a href="/departments/new" class="btn btn-primary">Add New Department</a>
+    </div>
+</div>

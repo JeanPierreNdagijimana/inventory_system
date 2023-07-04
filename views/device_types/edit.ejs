@@ -1,0 +1,27 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        <i class="fas fa-user-plus"></i> Edit Device Type
+      </h1>
+      <%- include('../partials/messages'); -%>
+        <form action="/device_types/edit/<%= device_type.id %>" method="POST">
+          <input type="hidden" name="_method" value="PUT">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" class="form-control" value="<%= device_type.name %>" />
+          </div>
+          <div class="form-group">
+            <label for="prefix">Prefix:</label>
+            <input type="text" name="prefix-show" class="form-control" disabled value="<%= device_type.prefix %>" />
+          </div>
+
+          <input type="text" name="prefix" class="form-control" hidden value="<%= device_type.prefix %>" />
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Save
+          </button>
+        </form>
+    </div>
+  </div>
+</div>

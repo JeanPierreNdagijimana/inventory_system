@@ -1,0 +1,47 @@
+<div>
+  <h1>Device Assignments</h1>
+  <%- include ('../partials/messages'); -%>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Employee email</th>
+          <th>Device code</th>
+          <th>Status</th>
+          <th>Created at</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% assignments.forEach(function(assignment){ %>
+          <tr>
+            <td>
+              <%= assignment.id %>
+            </td>
+            <td>
+              <%= assignment.employee.email %>
+            </td>
+            <td>
+              <%= assignment.device.code %>
+            </td>
+            <td>
+              <%= assignment.status %>
+            </td>
+            <td>
+              <%= assignment.createdAt.toLocaleString() %>
+            </td>
+            <td>
+              <form action="/assignments/unassign/<%= assignment.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-sm btn-danger" type="submit" <%=assignment.status==1 ? "" : "disabled" %>
+                  >Unassign</button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+    <div>
+      <a href="/assignments/new" class="btn btn-primary">Add New Assignment</a>
+    </div>
+</div>
