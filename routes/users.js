@@ -11,7 +11,6 @@ import {
   getUsers,
   getEditUser,
   postEditUser,
-  getDeleteUser,
 } from "../controllers/users.js";
 import auth from "../config/auth.js";
 
