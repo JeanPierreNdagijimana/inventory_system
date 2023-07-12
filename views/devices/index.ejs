@@ -33,7 +33,10 @@
               <%= device.code %>
             </td>
             <td>
-              <%= device.status %>
+              <span
+                class="badge rounded-pill bg-<%= device.status == 0 ? 'warning' : device.status == 1 ? 'success' : 'danger' %>">
+                <%= device.status==0 ? 'Not Assigned' : device.status==1 ? 'Assigned' : 'Decommissined' %>
+              </span>
             </td>
             <td>
               <%= device.createdAt.toLocaleString() %>
