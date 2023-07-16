@@ -25,7 +25,10 @@
               <%= assignment.device.code %>
             </td>
             <td>
-              <%= assignment.status %>
+              <span
+                class="badge rounded-pill bg-<%= assignment.status == 0 ? 'warning' : 'success' %>">
+                <%= assignment.status==0 ? 'Unassigned' : 'Assigned' %>
+              </span>
             </td>
             <td>
               <%= assignment.createdAt.toLocaleString() %>
