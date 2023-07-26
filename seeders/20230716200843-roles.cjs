@@ -12,6 +12,6 @@ module.exports = {
     ]);
   },
   down: async (queryInterface, Sequelize) => {
-    // await queryInterface.bulkDelete("roles", null, {});
+    await queryInterface.bulkDelete("roles", null, {});
   },
 };

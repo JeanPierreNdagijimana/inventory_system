@@ -6,7 +6,22 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seed": "npx sequelize-cli db:seed:all"
+    "all-seed": "npx sequelize-cli db:seed:all",
+    "roles-seed": "npx sequelize-cli db:seed --seed 20230716200843-roles.cjs",
+    "users-seed": "npx sequelize-cli db:seed --seed 20230716205720-users.cjs",
+    "departments-seed": "npx sequelize-cli db:seed --seed 20230726091052-departments.cjs",
+    "employees-seed": "npx sequelize-cli db:seed --seed 20230726091631-employees.cjs",
+    "device_types-seed": "npx sequelize-cli db:seed --seed 20230726091655-device_types.cjs",
+    "devices-seed": "npx sequelize-cli db:seed --seed 20230726091706-devices.cjs",
+    "assignments-seed": "npx sequelize-cli db:seed --seed 20230726091806-assignments.cjs",
+    "undo-all-seeds": "npx sequelize-cli db:seed:undo:all",
+    "undo-roles-seed": "npx sequelize-cli db:seed:undo --seed 20230716200843-roles.cjs",	
+    "undo-users-seed": "npx sequelize-cli db:seed:undo --seed 20230716205720-users.cjs",
+    "undo-departments-seed": "npx sequelize-cli db:seed:undo --seed 20230726091052-departments.cjs",
+    "undo-employees-seed": "npx sequelize-cli db:seed:undo --seed 20230726091631-employees.cjs",
+    "undo-device_types-seed": "npx sequelize-cli db:seed:undo --seed 20230726091655-device_types.cjs",
+    "undo-devices-seed": "npx sequelize-cli db:seed:undo --seed 20230726091706-devices.cjs",
+    "undo-assignments-seed": "npx sequelize-cli db:seed:undo --seed 20230726091806-assignments.cjs"
   },
   "author": "Jean Pierre Ndagijimana",
   "license": "ISC",
