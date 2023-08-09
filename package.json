@@ -18,10 +18,10 @@
     "express-ejs-layouts": "^2.5.1",
     "express-layouts": "^1.0.0",
     "express-session": "^1.17.3",
-    "mysql2": "^3.3.5",
+    "mysql2": "^3.5.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.32.0"
+    "sequelize": "^6.32.1"
   },
   "type": "module",
   "devDependencies": {
