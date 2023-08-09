@@ -15,7 +15,7 @@
     "devices-seed": "npx sequelize-cli db:seed --seed 20230726091706-devices.cjs",
     "assignments-seed": "npx sequelize-cli db:seed --seed 20230726091806-assignments.cjs",
     "undo-all-seeds": "npx sequelize-cli db:seed:undo:all",
-    "undo-roles-seed": "npx sequelize-cli db:seed:undo --seed 20230716200843-roles.cjs",	
+    "undo-roles-seed": "npx sequelize-cli db:seed:undo --seed 20230716200843-roles.cjs",
     "undo-users-seed": "npx sequelize-cli db:seed:undo --seed 20230716205720-users.cjs",
     "undo-departments-seed": "npx sequelize-cli db:seed:undo --seed 20230726091052-departments.cjs",
     "undo-employees-seed": "npx sequelize-cli db:seed:undo --seed 20230726091631-employees.cjs",
