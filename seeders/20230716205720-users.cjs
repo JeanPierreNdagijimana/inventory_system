@@ -2,8 +2,8 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("users", [
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert("users", [
       {
         first_name: "jean",
         last_name: "pierre",
@@ -17,7 +17,7 @@ module.exports = {
       },
     ]);
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("users", null, {});
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete("users", null, {});
   },
 };
